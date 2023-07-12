@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+# Execute program without relative path ruby
+#   ruby -Ilib ./bin/master_mind
+#   The options specifies the $LOAD_PATH to include the lib directory,
+#   allowing it to find and load the files from that directory.
+#
+#   For now just require the file directly.
+require_relative "../lib/master_mind"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+require "irb"
+IRB.start(__FILE__)
