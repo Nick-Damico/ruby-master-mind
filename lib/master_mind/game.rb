@@ -6,6 +6,12 @@ module MasterMind
     GUESSES_PER_ROUND = 4
     STATE = %i[start playing game_over].freeze
 
+    attr_reader :interface
+
+    def initialize(interface)
+      @interface = interface
+    end
+
     def start
       greeting
     end

@@ -3,6 +3,8 @@
 # A Gem's root file is in charge of laoding code for the gem.
 
 require "pry-byebug"
+require_relative "master_mind/game"
+require_relative "master_mind/cli"
 require_relative "master_mind/version"
 
 module MasterMind
@@ -10,5 +12,5 @@ module MasterMind
   # Your code goes here...
   require_relative "master_mind/game"
 
-  Game.new.start
+  Game.new(CLI.new).start
 end
