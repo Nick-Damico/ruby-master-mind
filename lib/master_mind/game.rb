@@ -27,7 +27,7 @@ module MasterMind
     private
 
     def generate_board
-      Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, ""))
+      Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
     end
   end
 end
