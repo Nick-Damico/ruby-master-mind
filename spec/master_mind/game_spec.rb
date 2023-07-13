@@ -38,7 +38,6 @@ module MasterMind
         expect(min_column_size).to eq expected_column_count
         expect(max_column_size).to eq expected_column_count
       end
-
     end
 
     it "returns message" do
