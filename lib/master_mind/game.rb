@@ -13,7 +13,7 @@ module MasterMind
     end
 
     def start
-      greeting
+      interface.greeting
     end
 
     def greeting
