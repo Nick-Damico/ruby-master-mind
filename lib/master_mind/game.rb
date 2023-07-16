@@ -25,7 +25,7 @@ module MasterMind
       @code_board
     end
 
-    def input_guess(guess)
+    def decode_guess(guess)
       raise ArgumentError, "guess must be a collection" unless guess.is_a?(Array)
       raise ArgumentError, "guess cannot be empty" if guess.empty?
 
