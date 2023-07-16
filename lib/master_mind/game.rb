@@ -6,9 +6,10 @@ module MasterMind
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
     VALID_OPTIONS = ["🔴", "🟢", "🔵", "🟡"].freeze
+    VALID_KEYS = ["⚪", "⚫"].freeze
     STATE = %i[start playing game_over].freeze
 
-    attr_accessor :current_turn
+    attr_accessor :current_turn, :key_board
     attr_reader :interface, :code_board, :key_board
 
     def initialize(interface)
@@ -31,6 +32,20 @@ module MasterMind
       raise ArgumentError, "guess cannot be empty" if guess.empty?
 
       board[current_turn] = guess
+    end
+
+    def score_decode_guess
+      current_row = current_turn
+      board[current_turn].each_with_index do |val, col|
+        key_board[current_row][col] =
+          if val == pattern[col]
+            VALID_KEYS[1]
+          elsif pattern.include?(val)
+            VALID_KEYS[0]
+          else
+            "-"
+          end
+      end
     end
 
     def pattern

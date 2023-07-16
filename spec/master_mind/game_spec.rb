@@ -71,5 +71,17 @@ module MasterMind
       end
     end
 
+
+    describe "#score_decode" do
+      it "marks the key_board with white buttons for each correctly decoded value" do
+        pattern = [*Array.new(3, "🟢"), "🔵"]
+        guess = ["🔵", "🔴", "🔴", "🔴"]
+        subject.instance_variable_set(:@pattern, pattern)
+        subject.insert_decode_guess(guess)
+        subject.score_decode_guess
+
+        expect(subject.key_board[subject.current_turn]).to eq ["⚪", "-", "-", "-"]
+      end
+    end
   end
 end
