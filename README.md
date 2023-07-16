@@ -1,8 +1,10 @@
 # MasterMind
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/master_mind`. To experiment with that code, run `bin/console` for an interactive prompt.
+Master Mind CLI is a command-line interface (CLI) implementation of the popular and challenging game Master Mind.
 
-TODO: Delete this and the text above, and describe your gem
+This repository provides a playable version of the game that can be run directly from the command line. Test your code-breaking skills by attempting to guess the secret pattern within the specified number of attempts. The game features customizable options such as the number of colors, code length, and the maximum number of attempts. The interactive CLI interface provides a user-friendly experience, allowing players to make guesses, receive feedback, and track their progress. Whether you are a fan of the original game or new to Master Mind, this CLI version offers an engaging and enjoyable way to challenge your logic and deduction skills. Have fun playing and mastering the code-breaking challenge with Master Mind CLI!
+
+Ruby code in the file `lib/master_mind`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
