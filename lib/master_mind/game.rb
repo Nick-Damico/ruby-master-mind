@@ -2,8 +2,9 @@
 
 module MasterMind
   class Game
-    GAME_ROUNDS = 10 # TODO: Make configurable from game menu.
+    PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
+    VALID_OPTIONS = [1, 2, 3, 4].freeze
     STATE = %i[start playing game_over].freeze
 
     attr_accessor :current_turn
@@ -30,6 +31,11 @@ module MasterMind
 
       board[current_turn] = guess
     end
+
+    def pattern
+      @pattern ||= VALID_OPTIONS.sample(PATTERN_LENGTH)
+    end
+
 
     private
 

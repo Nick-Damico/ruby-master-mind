@@ -49,5 +49,27 @@ module MasterMind
         expect(subject.board[subject.current_turn]).to eq players_guess
       end
     end
+
+    describe "#pattern" do
+      it "returns a secret pattern that the player must match to win" do
+        expect(subject.pattern).to be_a(Array)
+      end
+
+      it "returns a pattern that matches the pattern length defined by the game" do
+        expect(subject.pattern.length).to eq described_class::PATTERN_LENGTH
+      end
+
+      it "returns a pattern of only valid options defined by the game" do
+        subject.pattern.each do |value|
+          expect(described_class::VALID_OPTIONS).to include(value)
+        end
+      end
+
+      it "returns a consistent pattern across mulitple invocations" do
+        expected_pattern = subject.pattern
+        expect(subject.pattern).to eq expected_pattern
+      end
+    end
+
   end
 end
