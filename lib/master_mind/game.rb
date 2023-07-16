@@ -6,18 +6,20 @@ module MasterMind
     GUESSES_PER_ROUND = 4
     STATE = %i[start playing game_over].freeze
 
-    attr_reader :interface
+    attr_reader :interface, :code_board, :key_board
 
     def initialize(interface)
       @interface = interface
+      @code_board = generate_code_board
+      @key_board = generate_key_board
     end
 
     def start
       interface.greeting
     end
 
-    def greeting
-      puts "Welcome to MasterMind!"
+    def board
+      @code_board
     end
 
     def board
@@ -26,7 +28,11 @@ module MasterMind
 
     private
 
-    def generate_board
+    def generate_code_board
+      Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
+    end
+
+    def generate_key_board
       Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
     end
   end
