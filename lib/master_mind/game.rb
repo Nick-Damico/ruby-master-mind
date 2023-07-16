@@ -2,6 +2,7 @@
 
 module MasterMind
   class Game
+    GAME_ROUNDS = 10
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
     VALID_OPTIONS = [1, 2, 3, 4].freeze
