@@ -5,7 +5,7 @@ module MasterMind
     GAME_ROUNDS = 10
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
-    VALID_OPTIONS = [1, 2, 3, 4].freeze
+    VALID_OPTIONS = ["🔴", "🟢", "🔵", "🟡"].freeze
     STATE = %i[start playing game_over].freeze
 
     attr_accessor :current_turn
