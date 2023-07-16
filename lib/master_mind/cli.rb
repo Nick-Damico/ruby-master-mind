@@ -2,8 +2,8 @@
 
 module MasterMind
   class CLI
-    def greeting
-      output("Welcome to MasterMind!")
+    def display_board(code_board, key_board)
+      output(join_boards(code_board, key_board))
     end
 
     def greeting
@@ -12,11 +12,14 @@ module MasterMind
 
     private
 
-    def build_board(board)
-      formatted_rows =
-        board.map do |row|
-          "| #{row.join(" | ")} |"
-        end
+    def join_boards(code_board, key_board)
+      formatted_rows = []
+      code_board.length.times do |idx|
+        code_row = "| #{code_board[idx].join(" | ")} |"
+        key_row = "| #{key_board[idx].join(" | ")} |"
+
+        formatted_rows << [code_row, key_row].join(" ")
+      end
 
       formatted_rows.join("\n")
     end
