@@ -8,8 +8,8 @@ module MasterMind
     subject { game.interface }
 
     describe "#greeting" do
-      it "displays an initial message to the player" do
-        expect { subject.greeting }.to output("Welcome to MasterMind!\n").to_stdout
+      it "displays game title to the player" do
+        expect { subject.greeting }.to output(/MasterMind/i).to_stdout
       end
     end
 

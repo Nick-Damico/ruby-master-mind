@@ -6,8 +6,8 @@ module MasterMind
       output("Welcome to MasterMind!")
     end
 
-    def display_board(board)
-      output(build_board(board))
+    def greeting
+      display_launch_screen
     end
 
     private
@@ -23,6 +23,12 @@ module MasterMind
 
     def output(contents)
       puts contents
+    end
+
+    def display_launch_screen
+      output "#" * 30
+      output "WELCOME TO MASTERMIND!!"
+      output "#" * 30
     end
   end
 end
