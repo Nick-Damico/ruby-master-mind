@@ -36,15 +36,10 @@ module MasterMind
 
     def score_decode_guess
       current_row = current_turn
-      board[current_turn].each_with_index do |val, col|
-        key_board[current_row][col] =
-          if val == pattern[col]
-            VALID_KEYS[1]
-          elsif pattern.include?(val)
-            VALID_KEYS[0]
-          else
-            "-"
-          end
+      board[current_row].each_with_index do |val, col|
+        next unless pattern_includes_value?(val)
+
+        key_board[current_row][col] = score_pattern_match(val, col)
       end
     end
 
@@ -61,6 +56,14 @@ module MasterMind
 
     def generate_key_board
       Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
+    end
+
+    def pattern_includes_value?(val)
+      pattern.include?(val)
+    end
+
+    def score_pattern_match(val, column)
+      val == pattern[column] ? VALID_KEYS[1] : VALID_KEYS[0]
     end
   end
 end
