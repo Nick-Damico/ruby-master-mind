@@ -40,11 +40,11 @@ module MasterMind
       end
     end
 
-    describe "#decode_guess" do
+    describe "#insert_decode" do
       it "adds guess to board for the current turn" do
         players_guess = [*1..4]
         subject.current_turn = 1
-        subject.decode_guess(players_guess)
+        subject.insert_decode(players_guess)
 
         expect(subject.board[subject.current_turn]).to eq players_guess
       end
