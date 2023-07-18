@@ -18,6 +18,12 @@ module MasterMind
       end
     end
 
+    describe "#initialize" do
+      it "setups the #current_turn on the last row of the board" do
+        expect(subject.current_turn).to eq(described_class::GAME_ROUNDS - 1)
+      end
+    end
+
     describe "#board" do
       it "returns a 2D matrix board" do
         board = subject.board

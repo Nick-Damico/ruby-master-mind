@@ -14,7 +14,7 @@ module MasterMind
 
     def initialize(interface)
       @interface = interface
-      @current_turn = 0
+      @current_turn = GAME_ROUNDS - 1
       @code_board = generate_code_board
       @key_board = generate_key_board
     end
