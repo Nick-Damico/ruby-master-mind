@@ -17,6 +17,8 @@ module MasterMind
       @current_turn = GAME_ROUNDS - 1
       @code_board = generate_code_board
       @key_board = generate_key_board
+      @interface = interface
+      @pattern = nil
     end
 
     def start
