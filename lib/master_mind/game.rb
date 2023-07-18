@@ -10,10 +10,9 @@ module MasterMind
     STATE = %i[start playing game_over].freeze
 
     attr_accessor :current_turn, :key_board
-    attr_reader :interface, :code_board, :key_board
+    attr_reader :interface, :code_board
 
     def initialize(interface)
-      @interface = interface
       @current_turn = GAME_ROUNDS - 1
       @code_board = generate_code_board
       @key_board = generate_key_board
