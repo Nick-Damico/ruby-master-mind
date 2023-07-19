@@ -6,7 +6,10 @@ module MasterMind
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
     VALID_OPTIONS = ["🔴", "🟢", "🔵", "🟡"].freeze
-    VALID_KEYS = ["⚪", "⚫"].freeze
+    SCORE_TOKENS = {
+      match: "⚪",
+      exact_match: "⚫"
+    }.freeze
     STATE = %i[start playing game_over].freeze
 
     attr_accessor :current_turn, :key_board
@@ -64,7 +67,7 @@ module MasterMind
     end
 
     def score_pattern_match(val, column)
-      val == pattern[column] ? VALID_KEYS[1] : VALID_KEYS[0]
+      val == pattern[column] ? SCORE_TOKENS[:exact_match] : SCORE_TOKENS[:match]
     end
   end
 end
