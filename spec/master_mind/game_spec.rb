@@ -67,7 +67,7 @@ module MasterMind
 
       it "returns a pattern of only valid options defined by the game" do
         subject.pattern.each do |value|
-          expect(described_class::VALID_OPTIONS).to include(value)
+          expect(described_class::PLAYER_TOKENS).to include(value)
         end
       end
 
@@ -96,7 +96,7 @@ module MasterMind
         subject.insert_decode(guess)
         subject.score_decode_guess
 
-        expect(subject.key_board[subject.current_turn]).to eq ["-", "-", "-", "⚫"]
+        expect(subject.key_board[subject.current_turn]).to eq ["⚫", "-", "-", "-"]
       end
     end
   end

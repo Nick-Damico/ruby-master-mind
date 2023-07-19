@@ -5,7 +5,7 @@ module MasterMind
     GAME_ROUNDS = 10
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
-    VALID_OPTIONS = ["🔴", "🟢", "🔵", "🟡"].freeze
+    PLAYER_TOKENS = ["🔴", "🟢", "🔵", "🟡"].freeze
     SCORE_TOKENS = {
       match: "⚪",
       exact_match: "⚫"
@@ -48,7 +48,7 @@ module MasterMind
     end
 
     def pattern
-      @pattern ||= VALID_OPTIONS.sample(PATTERN_LENGTH)
+      @pattern ||= PLAYER_TOKENS.sample(PATTERN_LENGTH)
     end
 
 
