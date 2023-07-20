@@ -32,5 +32,19 @@ module MasterMind
         expect { subject.display_board(game.code_board, game.key_board) }.to output(expected_output).to_stdout
       end
     end
+
+    describe "#prompt_for_decode" do
+      it "prompts the player with a message to enter in a decode" do
+        expect { subject.prompt_for_decode }.to output("Enter your #{Game::PATTERN_LENGTH} digit decode guess: \n").to_stdout
+      end
+    end
+
+    describe "#player_decode" do
+      it "gets the players decode guess" do
+        expected_selection = 1
+        expect(subject).to receive(:player_decode).and_return(expected_selection)
+        expect(subject.player_decode).to eq(expected_selection)
+      end
+    end
   end
 end

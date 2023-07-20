@@ -10,6 +10,14 @@ module MasterMind
       display_launch_screen
     end
 
+    def player_decode
+      gets.chomp
+    end
+
+    def prompt_for_decode
+      puts "Enter your #{Game::PATTERN_LENGTH} digit decode guess: "
+    end
+
     private
 
     def join_boards(code_board, key_board)
