@@ -39,9 +39,6 @@ module MasterMind
     end
 
     def insert_decode(decode)
-      raise ArgumentError, "guess must be a collection" unless decode.is_a?(Array)
-      raise ArgumentError, "guess cannot be empty" if decode.empty?
-
       board[current_turn] = decode
     end
 
