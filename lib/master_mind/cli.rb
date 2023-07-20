@@ -15,8 +15,8 @@ module MasterMind
     def join_boards(code_board, key_board)
       formatted_rows = []
       code_board.length.times do |idx|
-        code_row = "| #{code_board[idx].join(" | ")} |"
-        key_row = "| #{key_board[idx].join(" | ")} |"
+        code_row = formatted_board_row(code_board, idx)
+        key_row = formatted_board_row(key_board, idx)
 
         formatted_rows << [code_row, key_row].join(" ")
       end
@@ -26,6 +26,10 @@ module MasterMind
 
     def output(contents)
       puts contents
+    end
+
+    def formatted_board_row(board, row_num)
+      "| #{board[row_num].join(" | ")} |"
     end
 
     def display_launch_screen
