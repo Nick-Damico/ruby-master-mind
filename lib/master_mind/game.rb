@@ -39,11 +39,12 @@ module MasterMind
     end
 
     def score_decode_guess
+      key_board_pos = 0
       current_row = current_turn
       board[current_row].each_with_index do |val, col|
         next unless pattern_includes_value?(val)
 
-        key_board[current_row][col] = score_pattern_match(val, col)
+        key_board[current_row][key_board_pos] = score_pattern_match(val, col)
       end
     end
 
