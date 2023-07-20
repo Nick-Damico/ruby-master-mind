@@ -10,16 +10,16 @@ module MasterMind
       match: "⚪",
       exact_match: "⚫"
     }.freeze
-    STATE = %i[start playing game_over].freeze
 
     attr_accessor :current_turn, :key_board
-    attr_reader :interface, :code_board
+    attr_reader :interface, :code_board, :state
 
     def initialize(interface)
       @current_turn = GAME_ROUNDS - 1
       @code_board = generate_code_board
       @key_board = generate_key_board
       @interface = interface
+      @state = State.new
       @pattern = nil
     end
 

@@ -5,6 +5,7 @@
 require "pry-byebug"
 require_relative "master_mind/game"
 require_relative "master_mind/cli"
+require_relative "master_mind/state"
 require_relative "master_mind/version"
 
 module MasterMind
