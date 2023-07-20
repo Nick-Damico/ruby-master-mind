@@ -63,6 +63,9 @@ module MasterMind
       @pattern ||= PLAYER_TOKENS.sample(PATTERN_LENGTH)
     end
 
+    def decoded?
+      board[current_turn] == pattern
+    end
 
     private
 

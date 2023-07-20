@@ -103,6 +103,14 @@ module MasterMind
       end
     end
 
+    describe "#decoded?" do
+      it "returns true if player decoded the secret pattern" do
+        expected_pattern = subject.pattern
+        subject.insert_decode(expected_pattern)
+
+        expect(subject.decoded?).to eq true
+      end
+    end
 
     describe "#score_decode" do
       it "marks the current row of the key_board for each correctly decoded value" do
