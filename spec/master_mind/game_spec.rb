@@ -46,6 +46,32 @@ module MasterMind
       end
     end
 
+    describe "#validate_decode" do
+      it "validates the players decode guess" do
+        decode = 1234
+        expect(subject.validate_decode(decode)).to eq true
+      end
+
+      it "validates that the decode guess matches the pattern length" do
+        decode = [*(1..4)].sample(described_class::PATTERN_LENGTH).join.to_i
+        expect(subject.validate_decode(decode)).to eq true
+      end
+
+      it "validates that the decode guess is not empty" do
+        decode = ""
+        expect(subject.validate_decode(decode)).to eq false
+      end
+
+      it "validates that the decode guess contains valid selections" do
+        invalid_option = described_class::PATTERN_LENGTH + 1
+        decode = [*(1..4)].sample(described_class::PATTERN_LENGTH - 1)
+        decode << invalid_option
+        decode.join.to_i
+
+        expect(subject.validate_decode(decode)).to eq false
+      end
+    end
+
     describe "#insert_decode" do
       it "adds guess to board for the current turn" do
         players_guess = [*1..4]

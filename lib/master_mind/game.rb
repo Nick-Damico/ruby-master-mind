@@ -31,11 +31,22 @@ module MasterMind
       @code_board
     end
 
+    def validate_decode(decode)
+      return false unless decode.to_s.length == PATTERN_LENGTH
+      return false unless decode_contains_valid_options?(decode)
+
+      true
+    end
+
     def insert_decode(decode)
       raise ArgumentError, "guess must be a collection" unless decode.is_a?(Array)
       raise ArgumentError, "guess cannot be empty" if decode.empty?
 
       board[current_turn] = decode
+    end
+
+    def decode_contains_valid_options?(decode)
+      decode.digits.reverse.all? { |num| num >= 1 && num <= PATTERN_LENGTH }
     end
 
     def score_decode_guess
