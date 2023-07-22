@@ -62,7 +62,7 @@ module MasterMind
     end
 
     def pattern
-      @pattern ||= PLAYER_TOKENS.sample(PATTERN_LENGTH)
+      @pattern ||= PLAYER_TOKENS.keys.sample(PATTERN_LENGTH)
     end
 
     def decoded?
