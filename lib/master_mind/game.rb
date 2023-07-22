@@ -5,7 +5,12 @@ module MasterMind
     GAME_ROUNDS = 10
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
-    PLAYER_TOKENS = ["🔴", "🟢", "🔵", "🟡"].freeze
+    PLAYER_TOKENS = {
+      1 => "🔴",
+      2 => "🟢",
+      3 => "🔵",
+      4 => "🟡"
+    }.freeze
     SCORE_TOKENS = {
       match: "⚪",
       exact_match: "⚫"
