@@ -83,7 +83,7 @@ module MasterMind
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
     end
 
-    def pattern_include_value?(val)
+    def pattern_includes_value?(val)
       pattern.include?(val)
     end
 
