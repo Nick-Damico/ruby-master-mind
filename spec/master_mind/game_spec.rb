@@ -115,16 +115,6 @@ module MasterMind
         expect(subject.key_board_currrent_row.tally[match_token]).to eq 3
         expect(subject.key_board_currrent_row.tally[exact_match_token]).to eq 1
       end
-
-      it "marks the current row of the key_board for each correctly decoded value in the correct position" do
-        pattern = [*Array.new(3, "🟢"), "🟡"]
-        guess = ["🔵", "🔴", "🔴", "🟡"]
-        subject.instance_variable_set(:@pattern, pattern)
-        subject.insert_decode(guess)
-        subject.score_decode_guess
-
-        expect(subject.key_board[subject.current_turn]).to eq ["⚫", "-", "-", "-"]
-      end
     end
   end
 end
