@@ -102,14 +102,18 @@ module MasterMind
     end
 
     describe "#score_decode" do
-      it "marks the current row of the key_board for each correctly decoded value" do
-        pattern = [*Array.new(3, "🟢"), "🔵"]
-        guess = ["🔵", "🔴", "🔴", "🔴"]
+      it "scores current row of the key_board for each correctly decoded value" do
+        pattern = %w[3 3 2 1]
+        guess = %w[1 2 2 2]
         subject.instance_variable_set(:@pattern, pattern)
         subject.insert_decode(guess)
         subject.score_decode_guess
 
-        expect(subject.key_board[subject.current_turn]).to eq ["⚪", "-", "-", "-"]
+        exact_match_token = described_class::SCORE_TOKENS[:exact_match]
+        match_token = described_class::SCORE_TOKENS[:match]
+
+        expect(subject.key_board_currrent_row.tally[match_token]).to eq 1
+        expect(subject.key_board_currrent_row.tally[exact_match_token]).to eq 1
       end
 
       it "marks the current row of the key_board for each correctly decoded value in the correct position" do
