@@ -2,8 +2,8 @@
 
 module MasterMind
   class CLI
-    def display_board(code_board, key_board)
-      output(join_boards(code_board, key_board))
+    def display_board(decode_board, scoreboard)
+      output(join_boards(decode_board, scoreboard))
     end
 
     def greeting
@@ -20,11 +20,11 @@ module MasterMind
 
     private
 
-    def join_boards(code_board, key_board)
+    def join_boards(decode_board, scoreboard)
       formatted_rows = []
-      code_board.length.times do |idx|
-        code_row = formatted_board_row(code_board, idx)
-        key_row = formatted_board_row(key_board, idx)
+      decode_board.length.times do |idx|
+        code_row = formatted_board_row(decode_board, idx)
+        key_row = formatted_board_row(scoreboard, idx)
 
         formatted_rows << [code_row, key_row].join(" ")
       end

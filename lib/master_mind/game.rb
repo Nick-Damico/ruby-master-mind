@@ -16,13 +16,13 @@ module MasterMind
       exact_match: "⚫"
     }.freeze
 
-    attr_accessor :current_turn, :key_board
-    attr_reader :interface, :code_board, :state
+    attr_accessor :current_turn, :scoreboard
+    attr_reader :interface, :decode_board, :state
 
     def initialize(interface)
       @current_turn = GAME_ROUNDS - 1
-      @code_board = generate_code_board
-      @key_board = generate_key_board
+      @decode_board = generate_decode_board
+      @scoreboard = generate_scoreboard
       @interface = interface
       @state = State.new
       @pattern = nil
@@ -33,7 +33,9 @@ module MasterMind
     end
 
     def board
-      @code_board
+      @decode_board
+    end
+
     end
 
     def validate_decode(decode)
@@ -52,12 +54,12 @@ module MasterMind
     end
 
     def score_decode_guess
-      key_board_pos = 0
+      scoreboard_pos = 0
       board[current_turn].each_with_index do |val, idx|
         next unless pattern_includes_value?(val)
 
-        key_board[current_turn][key_board_pos] = score_decode_match(val, idx)
-        key_board_pos += 1
+        scoreboard[current_turn][scoreboard_pos] = score_decode_match(val, idx)
+        scoreboard_pos += 1
       end
     end
 
@@ -69,17 +71,17 @@ module MasterMind
       board[current_turn] == pattern
     end
 
-    def key_board_currrent_row
-      key_board[current_turn]
+    def scoreboard_currrent_row
+      scoreboard[current_turn]
     end
 
     private
 
-    def generate_code_board
+    def generate_decode_board
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
     end
 
-    def generate_key_board
+    def generate_scoreboard
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
     end
 
