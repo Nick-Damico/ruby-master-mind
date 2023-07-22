@@ -76,11 +76,11 @@ module MasterMind
     private
 
     def generate_code_board
-      Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
+      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
     end
 
     def generate_key_board
-      Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
+      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
     end
 
     def pattern_include_value?(val)
