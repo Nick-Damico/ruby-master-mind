@@ -69,6 +69,10 @@ module MasterMind
       board[current_turn] == pattern
     end
 
+    def key_board_currrent_row
+      key_board[current_turn]
+    end
+
     private
 
     def generate_code_board
