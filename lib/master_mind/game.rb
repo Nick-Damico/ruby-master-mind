@@ -53,11 +53,11 @@ module MasterMind
 
     def score_decode_guess
       key_board_pos = 0
-      current_row = current_turn
-      board[current_row].each_with_index do |val, col|
+      board[current_turn].each_with_index do |val, idx|
         next unless pattern_includes_value?(val)
 
-        key_board[current_row][key_board_pos] = score_pattern_match(val, col)
+        key_board[current_turn][key_board_pos] = score_decode_match(val, idx)
+        key_board_pos += 1
       end
     end
 
@@ -79,12 +79,12 @@ module MasterMind
       Array.new(GAME_ROUNDS, Array.new(GUESSES_PER_ROUND, "-"))
     end
 
-    def pattern_includes_value?(val)
+    def pattern_include_value?(val)
       pattern.include?(val)
     end
 
-    def score_pattern_match(val, column)
-      val == pattern[column] ? SCORE_TOKENS[:exact_match] : SCORE_TOKENS[:match]
+    def score_decode_match(decode_val, column)
+      pattern[column] == decode_val ? SCORE_TOKENS[:exact_match] : SCORE_TOKENS[:match]
     end
   end
 end
