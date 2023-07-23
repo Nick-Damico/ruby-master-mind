@@ -2,7 +2,7 @@
 
 module MasterMind
   class State
-    PHASES = %i[start playing game_over].freeze
+    PHASES = %i[starting playing game_over].freeze
 
     attr_accessor :phase
 
@@ -10,8 +10,8 @@ module MasterMind
       @phase = :playing
     end
 
-    def start?
-      phase == :start
+    def starting?
+      phase == :starting
     end
 
     def playing?

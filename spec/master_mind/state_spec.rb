@@ -4,8 +4,8 @@ require "spec_helper"
 
 module MasterMind
   RSpec.describe State do
-    it "defines 3 valid states: start, playing, and game_over" do
-      expected_states = %i[start playing game_over]
+    it "defines 3 valid states: starting, playing, and game_over" do
+      expected_states = %i[starting playing game_over]
 
       expected_states.each do |state|
         expect(described_class::PHASES).to include(state)
@@ -29,10 +29,9 @@ module MasterMind
       end
     end
 
-    describe "#start?" do
-      it "returns true if the game is in the start state" do
-        subject.update(:start)
-        expect(subject.start?).to eq true
+    describe "#starting?" do
+      it "returns true if the game is in the STARTING state" do
+        expect(subject.starting?).to eq true
       end
     end
 
