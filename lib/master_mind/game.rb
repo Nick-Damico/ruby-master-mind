@@ -29,7 +29,19 @@ module MasterMind
     end
 
     def start
-      interface.greeting
+      # interface.greeting
+      # while state.playing?
+      #   interface.display_board(decode_board, scoreboard)
+      #   interface.prompt_for_decode
+      #   decode = interface.player_decode
+      #   until validate_decode(decode)
+      #     decode = interface.player_decode
+      #   end
+      #   insert_decode(decode)
+      #   score_decode
+      # end
+
+      # decoded?(decode) ? interface.display_winning_msg : interface.display_game_over_msg
     end
 
     def board
@@ -59,6 +71,10 @@ module MasterMind
         scoreboard[current_turn][scoreboard_pos] = score_decode_match(val, idx)
         scoreboard_pos += 1
       end
+    end
+
+    def out_of_turns?
+      current_turn >= Game::GAME_ROUNDS
     end
 
     def pattern

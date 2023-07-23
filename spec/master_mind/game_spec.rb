@@ -35,6 +35,13 @@ module MasterMind
       end
     end
 
+    describe "#out_of_turns?" do
+      it "returns true if player is out of turns" do
+        subject.current_turn = Game::GAME_ROUNDS
+        expect(subject.out_of_turns?).to eq true
+      end
+    end
+
     describe "#validate_decode" do
       it "validates the players decode guess" do
         decode = 1234
