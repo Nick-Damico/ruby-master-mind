@@ -30,7 +30,7 @@ module MasterMind
 
     describe "#playing?" do
       it "returns true if the game is in the playing state" do
-        subject.update(:playing)
+        subject.update(game)
         expect(subject.playing?).to eq true
       end
     end
@@ -43,7 +43,7 @@ module MasterMind
 
     describe "#game_over?" do
       it "returns true if the game is in the game_over state" do
-        subject.update(:game_over)
+        subject.phase = :game_over
         expect(subject.game_over?).to eq true
       end
     end

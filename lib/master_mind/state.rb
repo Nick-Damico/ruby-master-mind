@@ -9,6 +9,8 @@ module MasterMind
     def initialize
       @phase = :starting
     end
+
+    def update(game)
     end
 
     def starting?
