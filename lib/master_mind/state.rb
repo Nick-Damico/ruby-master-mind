@@ -7,7 +7,8 @@ module MasterMind
     attr_accessor :phase
 
     def initialize
-      @phase = :playing
+      @phase = :starting
+    end
     end
 
     def starting?

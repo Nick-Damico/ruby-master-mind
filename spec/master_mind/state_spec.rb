@@ -13,6 +13,12 @@ module MasterMind
       expect(described_class::PHASES.length).to eq 3
     end
 
+    describe "#initialize" do
+      it "starts in STARTING state" do
+        expect(subject.phase).to eq :starting
+      end
+    end
+
     describe "#update" do
       it "updates the state" do
         expected_state = :game_over
