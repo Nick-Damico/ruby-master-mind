@@ -4,6 +4,8 @@ require "spec_helper"
 
 module MasterMind
   RSpec.describe State do
+    let(:game) { Game.new(CLI.new) }
+
     it "defines 3 valid states: starting, playing, and game_over" do
       expected_states = %i[starting playing game_over]
 
@@ -20,11 +22,40 @@ module MasterMind
     end
 
     describe "#update" do
-      it "updates the state" do
-        expected_state = :game_over
-        subject.update(expected_state)
+      it "moves from STARTING to PLAYING" do
+        expect(subject.starting?)
+        subject.update(game)
 
-        expect(subject.phase).to eq expected_state
+        expect(subject.playing?).to eq true
+      end
+
+      it "moves from PLAYING to GAME_OVER if player runs out of turns" do
+        subject.update(game)
+        expect(subject.playing?).to eq true
+
+        game.instance_variable_set(:@current_turn, Game::GAME_ROUNDS)
+        subject.update(game)
+        expect(subject.game_over?).to eq true
+      end
+
+      it "does not move from PLAYING to GAME_OVER if player has turns remaining" do
+        subject.update(game)
+        expect(subject.playing?).to eq true
+
+        game.instance_variable_set(:@current_turn, (1..Game::GAME_ROUNDS - 1).to_a.sample)
+        subject.update(game)
+        expect(subject.playing?).to eq true
+      end
+
+      it "moves from PLAYING to GAME_OVER if player has turns remaining but has decoded the pattern(Won)" do
+        subject.update(game)
+        expect(subject.playing?).to eq true
+
+        game.instance_variable_set(:@current_turn, (1..Game::GAME_ROUNDS - 1).to_a.sample)
+        expect(game).to receive(:decoded?).and_return(true)
+        subject.update(game)
+
+        expect(subject.game_over?).to eq true
       end
     end
 

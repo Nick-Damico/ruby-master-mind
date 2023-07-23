@@ -11,6 +11,14 @@ module MasterMind
     end
 
     def update(game)
+      case phase
+      when :starting
+        self.phase = :playing
+      when :playing
+        return unless game.out_of_turns? || game.decoded?
+
+        self.phase = :game_over
+      end
     end
 
     def starting?
@@ -24,12 +32,5 @@ module MasterMind
     def game_over?
       phase == :game_over
     end
-
-    def update(state)
-      raise ArgumentError, "Invalid state" unless PHASES.include?(state)
-
-      self.phase = state
-    end
-
   end
 end
