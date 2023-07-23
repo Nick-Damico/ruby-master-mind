@@ -36,8 +36,6 @@ module MasterMind
       @decode_board
     end
 
-    end
-
     def validate_decode(decode)
       return false unless decode.to_s.length == PATTERN_LENGTH
       return false unless decode_contains_valid_options?(decode)
