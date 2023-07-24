@@ -44,35 +44,35 @@ module MasterMind
 
     describe "#validate_decode" do
       it "validates the players decode guess" do
-        decode = [1, 2, 3, 4]
-        expect(subject.validate_decode(decode)).to eq true
+        subject.decode = [1, 2, 3, 4]
+        expect(subject.validate_decode).to eq true
       end
 
       it "validates that the decode guess matches the pattern length" do
-        decode = [*(1..4)].sample(described_class::PATTERN_LENGTH)
-        expect(subject.validate_decode(decode)).to eq true
+        subject.decode = [*(1..4)].sample(described_class::PATTERN_LENGTH)
+        expect(subject.validate_decode).to eq true
       end
 
       it "validates that the decode guess is not empty" do
-        decode = ""
-        expect(subject.validate_decode(decode)).to eq false
+        subject.decode = ""
+        expect(subject.validate_decode).to eq false
       end
 
       it "validates that the decode guess contains valid selections" do
         invalid_option = described_class::PATTERN_LENGTH + 1
-        decode = [*(1..4)].sample(described_class::PATTERN_LENGTH - 1)
-        decode << invalid_option
+        subject.decode = [*(1..4)].sample(described_class::PATTERN_LENGTH - 1)
+        subject.decode << invalid_option
 
-        expect(subject.validate_decode(decode)).to eq false
+        expect(subject.validate_decode).to eq false
       end
     end
 
     describe "#insert_decode" do
       it "adds guess to board for the current turn" do
         subject.current_turn = 1
-        players_guess = [1, 2, 3, 4]
-        subject.insert_decode(players_guess)
-        expected_decode_in_symbols = players_guess.map { |num| Game::PLAYER_TOKENS[num] }
+        subject.decode = [1, 2, 3, 4]
+        subject.insert_decode
+        expected_decode_in_symbols = subject.decode.map { |num| Game::PLAYER_TOKENS[num] }
 
         expect(subject.board[subject.current_turn]).to eq expected_decode_in_symbols
       end
@@ -102,7 +102,8 @@ module MasterMind
     describe "#decoded?" do
       it "returns true if player decoded the secret pattern" do
         expected_pattern = subject.pattern
-        subject.insert_decode(expected_pattern)
+        subject.decode = expected_pattern
+        subject.insert_decode
 
         expect(subject.decoded?).to eq true
       end
@@ -113,8 +114,9 @@ module MasterMind
         pattern = [3, 3, 2, 1]
         guess   = [1, 2, 2, 2]
         subject.instance_variable_set(:@pattern, pattern)
-        subject.score_decode(guess)
-        subject.insert_decode(guess)
+        subject.decode = guess
+        subject.score_decode
+        subject.insert_decode
 
         exact_match_token = described_class::SCORE_TOKENS[:exact_match]
         match_token = described_class::SCORE_TOKENS[:match]
