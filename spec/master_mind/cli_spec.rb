@@ -40,10 +40,9 @@ module MasterMind
     end
 
     describe "#player_decode" do
-      it "gets the players decode guess" do
-        expected_selection = 1
-        expect(subject).to receive(:player_decode).and_return(expected_selection)
-        expect(subject.player_decode).to eq(expected_selection)
+      it "gets the players decode guess and coverts to an integer" do
+        allow(subject).to receive(:gets).and_return("1234")
+        expect(subject.player_decode).to eq([1, 2, 3, 4])
       end
     end
   end

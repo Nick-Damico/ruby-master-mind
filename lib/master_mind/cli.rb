@@ -13,7 +13,7 @@ module MasterMind
     end
 
     def player_decode
-      gets.chomp
+      gets.chomp.chars.map(&:to_i)
     end
 
     def prompt_for_decode
