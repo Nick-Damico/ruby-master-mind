@@ -2,6 +2,8 @@
 
 module MasterMind
   class CLI
+    PROMPT_MSG = "Enter your #{Game::PATTERN_LENGTH} digit decode guess: "
+
     def display_board(decode_board, scoreboard)
       output(join_boards(decode_board, scoreboard))
     end
@@ -15,7 +17,7 @@ module MasterMind
     end
 
     def prompt_for_decode
-      puts "Enter your #{Game::PATTERN_LENGTH} digit decode guess: "
+      puts PROMPT_MSG
     end
 
     private
