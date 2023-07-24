@@ -63,9 +63,9 @@ module MasterMind
       decode.digits.reverse.all? { |num| num >= 1 && num <= PATTERN_LENGTH }
     end
 
-    def score_decode_guess
+    def score_decode(decode)
       scoreboard_pos = 0
-      board[current_turn].each_with_index do |val, idx|
+      decode.chars.each_with_index do |val, idx|
         next unless pattern_includes_value?(val)
 
         scoreboard[current_turn][scoreboard_pos] = score_decode_match(val, idx)

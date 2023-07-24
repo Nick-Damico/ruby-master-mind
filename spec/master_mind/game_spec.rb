@@ -111,10 +111,10 @@ module MasterMind
     describe "#score_decode" do
       it "scores current row of the scoreboard for each correctly decoded value" do
         pattern = %w[3 3 2 1]
-        guess   = %w[1 2 2 2]
+        guess   = "1222"
         subject.instance_variable_set(:@pattern, pattern)
+        subject.score_decode(guess)
         subject.insert_decode(guess)
-        subject.score_decode_guess
 
         exact_match_token = described_class::SCORE_TOKENS[:exact_match]
         match_token = described_class::SCORE_TOKENS[:match]
