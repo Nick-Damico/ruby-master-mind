@@ -98,11 +98,11 @@ module MasterMind
     private
 
     def generate_decode_board
-      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
+      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
     end
 
     def generate_scoreboard
-      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "-") }
+      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
     end
 
     def pattern_includes_value?(val)
