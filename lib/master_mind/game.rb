@@ -80,7 +80,7 @@ module MasterMind
     end
 
     def pattern
-      @pattern ||= PLAYER_TOKENS.keys.map(&:to_i).sample(PATTERN_LENGTH)
+      @pattern ||= Array.new(GUESSES_PER_ROUND) { PLAYER_TOKENS.keys.map(&:to_i).sample }
     end
 
     def decoded?
