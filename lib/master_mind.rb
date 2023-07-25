@@ -12,5 +12,8 @@ module MasterMind
   class Error < StandardError; end
   # Your code goes here...
 
-  Game.new(CLI.new).start
+  Game.new(
+    CLI.new,
+    State.new
+  ).start
 end

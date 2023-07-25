@@ -4,7 +4,7 @@ require "spec_helper"
 
 module MasterMind
   RSpec.describe State do
-    let(:game) { Game.new(CLI.new) }
+    let(:game) { Game.new(CLI.new, State.new) }
 
     it "defines 3 valid states: starting, playing, and game_over" do
       expected_states = %i[starting playing game_over]

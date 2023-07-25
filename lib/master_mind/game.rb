@@ -19,12 +19,12 @@ module MasterMind
     attr_accessor :current_turn, :scoreboard, :decode
     attr_reader :interface, :decode_board, :state
 
-    def initialize(interface)
+    def initialize(interface, state)
       @current_turn = GAME_ROUNDS - 1
       @decode_board = generate_decode_board
       @scoreboard = generate_scoreboard
       @interface = interface
-      @state = State.new
+      @state = state
       @decode = []
       pattern
     end

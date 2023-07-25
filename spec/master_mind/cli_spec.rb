@@ -4,7 +4,7 @@ require "master_mind"
 
 module MasterMind
   RSpec.describe CLI do
-    let(:game) { Game.new(CLI.new) }
+    let(:game) { Game.new(CLI.new, State.new) }
     subject { game.interface }
 
     describe "#greeting" do
