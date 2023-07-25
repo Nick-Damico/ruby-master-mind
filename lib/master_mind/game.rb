@@ -92,6 +92,10 @@ module MasterMind
 
     private
 
+    def turn_count!
+      self.current_turn -= 1
+    end
+
     def convert_to_symbols(num_arr)
       num_arr.map { |num| PLAYER_TOKENS[num] }
     end
