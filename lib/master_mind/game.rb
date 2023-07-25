@@ -75,7 +75,7 @@ module MasterMind
     end
 
     def out_of_turns?
-      current_turn >= Game::GAME_ROUNDS
+      current_turn.negative?
     end
 
     def pattern
@@ -83,7 +83,8 @@ module MasterMind
     end
 
     def decoded?
-      board[current_turn] == convert_to_symbols(pattern)
+      pattern_in_symbols = convert_to_symbols(pattern)
+      board.any? { |decode| decode == pattern_in_symbols }
     end
 
     def scoreboard_currrent_row

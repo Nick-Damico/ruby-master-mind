@@ -41,7 +41,7 @@ module MasterMind
 
     describe "#out_of_turns?" do
       it "returns true if player is out of turns" do
-        subject.current_turn = Game::GAME_ROUNDS
+        subject.current_turn = -1
         expect(subject.out_of_turns?).to eq true
       end
     end

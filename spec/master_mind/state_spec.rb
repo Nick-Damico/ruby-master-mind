@@ -33,7 +33,7 @@ module MasterMind
         subject.update(game)
         expect(subject.playing?).to eq true
 
-        game.instance_variable_set(:@current_turn, Game::GAME_ROUNDS)
+        game.instance_variable_set(:@current_turn, -1)
         subject.update(game)
         expect(subject.game_over?).to eq true
       end
