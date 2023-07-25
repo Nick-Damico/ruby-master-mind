@@ -13,9 +13,11 @@ module MasterMind
       end
     end
 
-    describe "#board" do
+    describe "Game Boards" do
+      %i[board scoreboard].each do |board_sym|
+        context "##{board_sym}" do
       it "returns a 2D matrix board" do
-        board = subject.board
+            board = subject.send(board_sym)
         expect(board).to be_a Array
         expect(board.first).to be_a Array
       end
@@ -32,6 +34,8 @@ module MasterMind
 
         expect(min_column_size).to eq expected_column_count
         expect(max_column_size).to eq expected_column_count
+      end
+    end
       end
     end
 
