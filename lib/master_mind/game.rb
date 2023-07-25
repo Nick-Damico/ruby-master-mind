@@ -64,10 +64,6 @@ module MasterMind
       board[current_turn] = convert_to_symbols(decode)
     end
 
-    def decode_contains_valid_options?
-      decode.all? { |num| num >= 1 && num <= PATTERN_LENGTH }
-    end
-
     def score_decode
       scoreboard_pos = 0
       decode.each_with_index do |val, idx|
@@ -94,11 +90,15 @@ module MasterMind
       scoreboard[current_turn]
     end
 
+    private
+
     def convert_to_symbols(num_arr)
       num_arr.map { |num| PLAYER_TOKENS[num] }
     end
 
-    private
+    def decode_contains_valid_options?
+      decode.all? { |num| num >= 1 && num <= PATTERN_LENGTH }
+    end
 
     def generate_decode_board
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
