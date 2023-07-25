@@ -3,6 +3,8 @@
 module MasterMind
   class CLI
     PROMPT_MSG = "Enter your #{Game::PATTERN_LENGTH} digit decode guess: "
+    WINNING_MSG = "You WIN! You have successfully decoded the pattern"
+    GAMEOVER_MSG = "Game Over! You have failed to decode the secret pattern"
 
     def display_board(decode_board, scoreboard)
       output(join_boards(decode_board, scoreboard))
@@ -18,6 +20,14 @@ module MasterMind
 
     def prompt_for_decode
       puts PROMPT_MSG
+    end
+
+    def display_winning_msg
+      puts WINNING_MSG
+    end
+
+    def display_gameover_msg
+      puts GAMEOVER_MSG
     end
 
     private

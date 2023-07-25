@@ -7,9 +7,23 @@ module MasterMind
     let(:game) { Game.new(CLI.new, State.new) }
     subject { game.interface }
 
+    context "Messages" do
     describe "#greeting" do
       it "displays game title to the player" do
         expect { subject.greeting }.to output(/MasterMind/i).to_stdout
+      end
+    end
+
+      describe "#display_winning_msg" do
+        it "notifies the player that they have won" do
+          expect { subject.display_winning_msg }.to output("#{CLI::WINNING_MSG}\n").to_stdout
+        end
+      end
+
+      describe "#display_gameover_msg" do
+        it "notifies the player that they have won" do
+          expect { subject.display_gameover_msg }.to output("#{CLI::GAMEOVER_MSG}\n").to_stdout
+        end
       end
     end
 
