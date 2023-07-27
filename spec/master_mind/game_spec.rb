@@ -16,26 +16,26 @@ module MasterMind
     describe "Game Boards" do
       %i[board scoreboard].each do |board_sym|
         context "##{board_sym}" do
-      it "returns a 2D matrix board" do
+          it "returns a 2D matrix board" do
             board = subject.send(board_sym)
-        expect(board).to be_a Array
-        expect(board.first).to be_a Array
-      end
+            expect(board).to be_a Array
+            expect(board.first).to be_a Array
+          end
 
-      it "contains rows equal to the max number of rounds per game" do
-        expected_row_count = described_class::GAME_ROUNDS
-        expect(subject.board.length).to eq expected_row_count
-      end
+          it "contains rows equal to the max number of rounds per game" do
+            expected_row_count = described_class::GAME_ROUNDS
+            expect(subject.board.length).to eq expected_row_count
+          end
 
-      it "contains columns equal to the guesses per round" do
-        expected_column_count = described_class::GUESSES_PER_ROUND
-        min_column_size = subject.board.max.size
-        max_column_size = subject.board.min.size
+          it "contains columns equal to the guesses per round" do
+            expected_column_count = described_class::GUESSES_PER_ROUND
+            min_column_size = subject.board.max.size
+            max_column_size = subject.board.min.size
 
-        expect(min_column_size).to eq expected_column_count
-        expect(max_column_size).to eq expected_column_count
-      end
-    end
+            expect(min_column_size).to eq expected_column_count
+            expect(max_column_size).to eq expected_column_count
+          end
+        end
       end
     end
 
