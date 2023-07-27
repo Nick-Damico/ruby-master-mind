@@ -8,11 +8,11 @@ module MasterMind
     subject { game.interface }
 
     context "Messages" do
-    describe "#greeting" do
-      it "displays game title to the player" do
-        expect { subject.greeting }.to output(/MasterMind/i).to_stdout
+      describe "#greeting" do
+        it "displays game title to the player" do
+          expect { subject.greeting }.to output(/MasterMind/i).to_stdout
+        end
       end
-    end
 
       describe "#display_winning_msg" do
         it "notifies the player that they have won" do
