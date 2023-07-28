@@ -28,8 +28,8 @@ module MasterMind
     end
 
     context "Winning Game" do
-      it "allows a player to playthrough to a WINNING game by guessing the pattern" do
-        stub_guesses = %w[1111 2222 3333]
+      it "should let a player play through to a WINNING game by successfully guessing the pattern" do
+        guesses = %w[1111 2222 3333 4444]
         stub_guesses << @pattern.join
         expected_end_of_game_turn_count = subject.current_turn - stub_guesses.size
 
