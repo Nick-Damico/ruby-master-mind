@@ -30,23 +30,25 @@ module MasterMind
     end
 
     def start
-      # interface.greeting
-      # state.update(self)
-      # while state.playing?
-      #   interface.display_board(decode_board, scoreboard)
+      interface.greeting
+      state.update(self)
 
-      #   until validate_decode
-      #     interface.prompt_for_decode
-      #     self.decode = interface.player_decode
-      #   end
+      while state.playing?
+        interface.display_board(decode_board, scoreboard)
+        until validate_decode
+          interface.prompt_for_decode
+          self.decode = interface.player_decode
+        end
 
-      #   score_decode
-      #   insert_decode
-      #   self.current_turn -= 1
-      #   state.update(self)
-      # end
+        score_decode
+        insert_decode
+        turn_count!
+        state.update(self)
+        decode.clear
+      end
 
-      # decoded?(decode) ? interface.display_winning_msg : interface.display_game_over_msg
+      interface.display_board(decode_board, scoreboard)
+      decoded? ? interface.display_winning_msg : interface.display_gameover_msg
     end
 
     def board
