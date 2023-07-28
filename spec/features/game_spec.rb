@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+module MasterMind
+  RSpec.describe "Mastermind Game", type: :feature do
+    subject { Game.new(CLI.new, State.new) }
+
+    before(:context) do
+      # Redirect STDOUT and STDERR to /dev/null (on Unix-based systems) or NUL (on Windows) using the with block.
+      # Any output during the block execution will be suppressed.
+      @original_stdout = $stdout
+      @original_stderr = $stderr
+      $stdout = File.new(File::NULL, "w")
+      $stderr = File.new(File::NULL, "w")
+    end
+
+    after(:context) do
+      # Restore the original STDOUT and STDERR after the examples are done.
+      $stdout = @original_stdout
+      $stderr = @original_stderr
+    end
+
+    before do
+      # allow($stdout).to receive(:write)
+      @pattern = [4, 3, 2, 1]
+      subject.instance_variable_set(:@pattern, @pattern)
+    end
+
+    context "Winning Game" do
+      it "allows a player to playthrough to a WINNING game by guessing the pattern" do
+        stub_guesses = %w[1111 2222 3333]
+        stub_guesses << @pattern.join
+        expected_end_of_game_turn_count = subject.current_turn - stub_guesses.size
+
+        allow(subject.interface).to receive(:gets).and_return(*stub_guesses, @pattern.join)
+        expect(subject.pattern).to eq @pattern
+        expect(subject.state.starting?).to eq true
+
+        subject.start
+        expect(subject.current_turn).to eq expected_end_of_game_turn_count
+        expect(subject.state.game_over?).to eq true
+        expect(subject.decoded?).to eq true
+      end
+    end
+
+    context "Losing Game"; end
+end
