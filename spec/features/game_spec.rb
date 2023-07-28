@@ -29,7 +29,7 @@ module MasterMind
 
     context "Winning Game" do
       it "should let a player play through to a WINNING game by successfully guessing the pattern" do
-        guesses = %w[1111 2222 3333 4444]
+        stub_guesses = %w[1111 2222 3333 4444]
         stub_guesses << @pattern.join
         expected_end_of_game_turn_count = subject.current_turn - stub_guesses.size
 
@@ -44,5 +44,20 @@ module MasterMind
       end
     end
 
-    context "Losing Game"; end
+    context "Losing Game" do
+      it "should let a player play through an entire game without successfully guessing the pattern" do
+        wrong_guesses = 10.times.map { %w[1111 2222 3333 4444] }.flatten
+        expected_end_of_game_turn_count = -1
+
+        allow(subject.interface).to receive(:gets).and_return(*wrong_guesses)
+        expect(subject.pattern).to eq @pattern
+        expect(subject.state.starting?).to eq true
+
+        subject.start
+        expect(subject.current_turn).to eq expected_end_of_game_turn_count
+        expect(subject.state.game_over?).to eq true
+        expect(subject.decoded?).to eq false
+      end
+    end
+  end
 end
