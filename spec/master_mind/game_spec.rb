@@ -103,13 +103,13 @@ module MasterMind
       end
     end
 
-    describe "#decoded?" do
+    describe "#won?" do
       it "returns true if player decoded the secret pattern" do
         expected_pattern = subject.pattern
         subject.decode = expected_pattern
         subject.insert_decode
 
-        expect(subject.decoded?).to eq true
+        expect(subject.won?).to eq true
       end
     end
 
