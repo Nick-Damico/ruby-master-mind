@@ -15,7 +15,7 @@ module MasterMind
       when :starting
         self.phase = :playing
       when :playing
-        return unless game.out_of_turns? || game.decoded?
+        return unless game.out_of_turns? || game.won?
 
         self.phase = :game_over
       end

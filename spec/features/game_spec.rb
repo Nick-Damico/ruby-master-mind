@@ -40,7 +40,7 @@ module MasterMind
         subject.start
         expect(subject.current_turn).to eq expected_end_of_game_turn_count
         expect(subject.state.game_over?).to eq true
-        expect(subject.decoded?).to eq true
+        expect(subject.won?).to eq true
       end
     end
 
@@ -56,7 +56,7 @@ module MasterMind
         subject.start
         expect(subject.current_turn).to eq expected_end_of_game_turn_count
         expect(subject.state.game_over?).to eq true
-        expect(subject.decoded?).to eq false
+        expect(subject.won?).to eq false
       end
     end
   end

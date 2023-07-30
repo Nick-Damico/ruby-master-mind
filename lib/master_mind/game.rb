@@ -48,7 +48,7 @@ module MasterMind
       end
 
       interface.display_board(decode_board, scoreboard)
-      decoded? ? interface.display_winning_msg : interface.display_gameover_msg
+      won? ? interface.display_winning_msg : interface.display_gameover_msg
     end
 
     def board
@@ -84,9 +84,8 @@ module MasterMind
       @pattern ||= Array.new(GUESSES_PER_ROUND) { PLAYER_TOKENS.keys.map(&:to_i).sample }
     end
 
-    def decoded?
-      pattern_in_symbols = convert_to_symbols(pattern)
-      board.any? { |decode| decode == pattern_in_symbols }
+    def won?
+      decoded? && !out_of_turns?
     end
 
     def scoreboard_currrent_row
@@ -105,6 +104,11 @@ module MasterMind
 
     def decode_contains_valid_options?
       decode.all? { |num| num >= 1 && num <= PATTERN_LENGTH }
+    end
+
+    def decoded?
+      pattern_in_symbols = convert_to_symbols(pattern)
+      board.any? { |decode| decode == pattern_in_symbols }
     end
 
     def generate_decode_board
