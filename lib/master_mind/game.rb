@@ -35,7 +35,7 @@ module MasterMind
 
       while state.playing?
         interface.display_board(decode_board, scoreboard)
-        until validate_decode
+        until valid_decode?
           interface.prompt_for_decode
           self.decode = interface.player_decode
         end
@@ -55,7 +55,7 @@ module MasterMind
       @decode_board
     end
 
-    def validate_decode
+    def valid_decode?
       return false unless decode.length == PATTERN_LENGTH
       return false unless decode_contains_valid_options?
 

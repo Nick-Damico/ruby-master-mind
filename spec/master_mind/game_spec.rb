@@ -46,20 +46,20 @@ module MasterMind
       end
     end
 
-    describe "#validate_decode" do
+    describe "#valid_decode?" do
       it "validates the players decode guess" do
         subject.decode = [1, 2, 3, 4]
-        expect(subject.validate_decode).to eq true
+        expect(subject.valid_decode?).to eq true
       end
 
       it "validates that the decode guess matches the pattern length" do
         subject.decode = [*(1..4)].sample(described_class::PATTERN_LENGTH)
-        expect(subject.validate_decode).to eq true
+        expect(subject.valid_decode?).to eq true
       end
 
       it "validates that the decode guess is not empty" do
         subject.decode = ""
-        expect(subject.validate_decode).to eq false
+        expect(subject.valid_decode?).to eq false
       end
 
       it "validates that the decode guess contains valid selections" do
@@ -67,7 +67,7 @@ module MasterMind
         subject.decode = [*(1..4)].sample(described_class::PATTERN_LENGTH - 1)
         subject.decode << invalid_option
 
-        expect(subject.validate_decode).to eq false
+        expect(subject.valid_decode?).to eq false
       end
     end
 
