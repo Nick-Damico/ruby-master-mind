@@ -54,9 +54,14 @@ module MasterMind
     end
 
     describe "#player_decode" do
-      it "gets the players decode guess and coverts to an integer" do
+      it "gets the players decode guess" do
         allow(subject).to receive(:gets).and_return("1234")
         expect(subject.player_decode).to eq([1, 2, 3, 4])
+      end
+
+      it "does not raise an error if gets returns a nil value" do
+        allow(subject).to receive(:gets).and_return(nil)
+        expect { subject.player_decode }.to_not raise_error
       end
     end
   end

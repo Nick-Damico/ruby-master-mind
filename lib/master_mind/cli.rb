@@ -15,7 +15,10 @@ module MasterMind
     end
 
     def player_decode
-      gets.chomp.chars.map(&:to_i)
+      input = gets
+      return nil if input.nil? || input.empty?
+
+      to_i(input.chomp)
     end
 
     def prompt_for_decode
@@ -42,6 +45,12 @@ module MasterMind
       end
 
       formatted_rows.join("\n")
+    end
+
+    def to_i(decode)
+      return decode unless decode.is_a?(String)
+
+      decode.chars.map(&:to_i)
     end
 
     def output(contents)
