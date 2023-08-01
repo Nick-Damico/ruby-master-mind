@@ -59,10 +59,18 @@ module MasterMind
         expect(subject.player_decode).to eq([1, 2, 3, 4])
       end
 
-      it "does not raise an error if gets returns a nil value" do
-        allow(subject).to receive(:gets).and_return(nil)
-        expect { subject.player_decode }.to_not raise_error
+      context "invalid decode entry" do
+        it "does not raise an error if decode is nil value" do
+          allow(subject).to receive(:gets).and_return(nil)
+          expect { subject.player_decode }.to_not raise_error
+        end
+
+        it "does not raise an error if decode is a blank value" do
+          allow(subject).to receive(:gets).and_return("")
+          expect { subject.player_decode }.to_not raise_error
+        end
       end
+
     end
   end
 end
