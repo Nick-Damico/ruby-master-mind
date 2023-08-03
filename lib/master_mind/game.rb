@@ -31,7 +31,7 @@ module MasterMind
 
     def start
       interface.greeting
-      state.update(self)
+      update_state
 
       while state.playing?
         interface.display_board(decode_board, scoreboard)
@@ -42,8 +42,8 @@ module MasterMind
 
         score_decode
         insert_decode
+        update_state
         turn_count!
-        state.update(self)
         decode.clear
       end
 
@@ -121,6 +121,10 @@ module MasterMind
 
     def pattern_includes_value?(val)
       pattern.include?(val)
+    end
+
+    def update_state
+      state.update(self)
     end
 
     def score_decode_match(decode_val, column)
