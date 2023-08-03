@@ -56,7 +56,7 @@ module MasterMind
     end
 
     def valid_decode?
-      return false unless decode.length == PATTERN_LENGTH
+      return false unless decode&.length == PATTERN_LENGTH
       return false unless decode_contains_valid_options?
 
       true
