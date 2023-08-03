@@ -9,20 +9,25 @@ Ruby code is located the file `lib/` directory.
 To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
+
 Clone project:
+
 ```bash
 git clone https://github.com/Nick-Damico/ruby-master-mind.git
 ```
 
-Setup Project
+Setup Project with dependencies
+
 ```bash
 ./bin/setup
 ```
 
 Execute App
+
 ```bash
 ./exe/mastermind
 ```
+
 ## Docker
 
 Install Docker Desktop https://www.docker.com/get-started/
