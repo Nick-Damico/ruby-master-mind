@@ -33,7 +33,7 @@ module MasterMind
         stub_guesses << @pattern.join
         expected_end_of_game_turn_count = subject.current_turn - stub_guesses.size
 
-        allow(subject.interface).to receive(:gets).and_return(*stub_guesses, @pattern.join)
+        allow(subject.cli).to receive(:gets).and_return(*stub_guesses, @pattern.join)
         expect(subject.pattern).to eq @pattern
         expect(subject.state.starting?).to eq true
 
@@ -49,7 +49,7 @@ module MasterMind
         wrong_guesses = 10.times.map { %w[1111 2222 3333 4444] }.flatten
         expected_end_of_game_turn_count = -1
 
-        allow(subject.interface).to receive(:gets).and_return(*wrong_guesses)
+        allow(subject.cli).to receive(:gets).and_return(*wrong_guesses)
         expect(subject.pattern).to eq @pattern
         expect(subject.state.starting?).to eq true
 

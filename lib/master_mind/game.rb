@@ -17,27 +17,27 @@ module MasterMind
     }.freeze
 
     attr_accessor :current_turn, :scoreboard, :decode
-    attr_reader :interface, :decode_board, :state
+    attr_reader :cli, :decode_board, :state
 
-    def initialize(interface, state)
+    def initialize(cli, state)
       @current_turn = GAME_ROUNDS - 1
       @decode_board = generate_decode_board
       @scoreboard = generate_scoreboard
-      @interface = interface
+      @cli = cli
       @state = state
       @decode = []
       pattern
     end
 
     def start
-      interface.greeting
+      cli.greeting
       update_state
 
       while state.playing?
         display_board
         until valid_decode?
-          interface.prompt_for_decode
-          self.decode = interface.player_decode
+          cli.prompt_for_decode
+          self.decode = cli.player_decode
         end
 
         score_decode
@@ -47,7 +47,7 @@ module MasterMind
       end
 
       display_board
-      won? ? interface.display_winning_msg : interface.display_gameover_msg
+      won? ? cli.display_winning_msg : cli.display_gameover_msg
     end
 
     def board
@@ -111,7 +111,7 @@ module MasterMind
     end
 
     def display_board
-      interface.display_board(board, score_board)
+      cli.display_board(board, scoreboard)
     end
 
     def generate_decode_board

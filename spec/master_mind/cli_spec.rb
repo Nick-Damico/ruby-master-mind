@@ -5,7 +5,7 @@ require "master_mind"
 module MasterMind
   RSpec.describe CLI do
     let(:game) { Game.new(CLI.new, State.new) }
-    subject { game.interface }
+    subject { game.cli }
 
     context "Messages" do
       describe "#greeting" do
@@ -49,7 +49,9 @@ module MasterMind
 
     describe "#prompt_for_decode" do
       it "prompts the player with a message to enter in a decode" do
-        expect { subject.prompt_for_decode }.to output("Enter your #{Game::PATTERN_LENGTH} digit decode guess: \n").to_stdout
+        expect do
+          subject.prompt_for_decode
+        end.to output("Enter your #{Game::PATTERN_LENGTH} digit decode guess: \n").to_stdout
       end
     end
 
@@ -70,7 +72,6 @@ module MasterMind
           expect { subject.player_decode }.to_not raise_error
         end
       end
-
     end
   end
 end
