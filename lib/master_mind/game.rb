@@ -30,14 +30,14 @@ module MasterMind
     end
 
     def start
-      cli.greeting
+      display_start_screen
       update_state
 
       while state.playing?
         display_board
         until valid_decode?
-          cli.prompt_for_decode
-          self.decode = cli.player_decode
+          display_options
+          player_decode
         end
 
         score_decode
@@ -47,7 +47,7 @@ module MasterMind
       end
 
       display_board
-      won? ? cli.display_winning_msg : cli.display_gameover_msg
+      display_final_msg
     end
 
     def board
@@ -112,6 +112,31 @@ module MasterMind
 
     def display_board
       cli.display_board(board, scoreboard)
+    end
+
+    def display_options
+      cli.display_options
+    end
+
+    def display_start_screen
+      cli.greeting
+    end
+
+    def display_gameover_msg
+      cli.display_gameover_msg
+    end
+
+    def display_winning_msg
+      cli.display_winning_msg
+    end
+
+    def display_final_msg
+      won? ? display_winning_msg : display_gameover_msg
+    end
+
+    def player_decode
+      cli.prompt_for_decode
+      self.decode = cli.player_decode
     end
 
     def generate_decode_board
