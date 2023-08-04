@@ -34,7 +34,7 @@ module MasterMind
       update_state
 
       while state.playing?
-        interface.display_board(decode_board, scoreboard)
+        display_board
         until valid_decode?
           interface.prompt_for_decode
           self.decode = interface.player_decode
@@ -42,12 +42,11 @@ module MasterMind
 
         score_decode
         insert_decode
-        update_state
         turn_count!
         decode.clear
       end
 
-      interface.display_board(decode_board, scoreboard)
+      display_board
       won? ? interface.display_winning_msg : interface.display_gameover_msg
     end
 
@@ -109,6 +108,10 @@ module MasterMind
     def decoded?
       pattern_in_symbols = convert_to_symbols(pattern)
       board.any? { |decode| decode == pattern_in_symbols }
+    end
+
+    def display_board
+      interface.display_board(board, score_board)
     end
 
     def generate_decode_board
