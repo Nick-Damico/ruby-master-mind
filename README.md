@@ -8,6 +8,9 @@ Ruby code is located the file `lib/` directory.
 
 To experiment with that code, run `bin/console` for an interactive prompt.
 
+## Screenshot
+![Screenshot from 2023-08-04 15-02-38](https://github.com/Nick-Damico/ruby-master-mind/assets/19657584/1e4e8dbe-16c3-41a8-aff6-9484ab26c5fa)
+
 ## Installation
 
 Clone project:
