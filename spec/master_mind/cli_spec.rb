@@ -59,7 +59,7 @@ module MasterMind
       it "prompts the player with a message to enter in a decode" do
         expect do
           subject.prompt_for_decode
-        end.to output("Enter your #{Game::PATTERN_LENGTH} digit decode guess: \n").to_stdout
+        end.to output("#{CLI::PROMPT_MSG}\n").to_stdout
       end
     end
 

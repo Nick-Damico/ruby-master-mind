@@ -44,6 +44,8 @@ module MasterMind
         insert_decode
         turn_count!
         decode.clear
+
+        update_state
       end
 
       display_board
