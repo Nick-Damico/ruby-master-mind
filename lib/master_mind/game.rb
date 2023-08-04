@@ -151,6 +151,10 @@ module MasterMind
       pattern.include?(val)
     end
 
+    def prompt_for_decode
+      cli.prompt_for_decode
+    end
+
     def update_state
       state.update(self)
     end
