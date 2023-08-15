@@ -1,6 +1,13 @@
+PATH
+  remote: .
+  specs:
+    master_mind (0.1.0)
+      artii (~> 2.1, >= 2.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    artii (2.1.2)
     ast (2.4.2)
     byebug (11.1.3)
     coderay (1.1.3)
@@ -18,11 +25,11 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    racc (1.7.1)
+    racc (1.4.16)
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.8.1)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -32,11 +39,11 @@ GEM
     rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.5)
+    rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
-    rubocop (1.54.1)
+    rubocop (1.55.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -44,7 +51,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.0, < 2.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
@@ -56,6 +63,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  master_mind!
   pry-byebug
   rake (~> 13.0)
   rspec (~> 3.0)

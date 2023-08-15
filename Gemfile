@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 # Specify your gem's dependencies in master_mind.gemspec
-# gemspec
+gemspec
 
 group :development do
   gem "pry-byebug"
