@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
+require "artii"
+
 module MasterMind
   class CLI
     PROMPT_MSG = "Enter a #{Game::PATTERN_LENGTH} digit decode guess:"
     WINNING_MSG = "You WIN! You have successfully decoded the pattern"
     GAMEOVER_MSG = "Game Over! You have failed to decode the secret pattern"
+
+    attr_reader :font
+
+    def initialize
+      @font = Artii::Base.new
+    end
 
     def display_board(decode_board, scoreboard)
       output(join_boards(decode_board, scoreboard))
@@ -67,9 +75,7 @@ module MasterMind
     end
 
     def display_launch_screen
-      output "#" * 30
-      output "WELCOME TO MASTERMIND!!"
-      output "#" * 30
+      puts font.asciify "MASTERMIND!!"
     end
   end
 end
