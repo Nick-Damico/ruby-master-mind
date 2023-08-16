@@ -32,6 +32,7 @@ module MasterMind
         # TODO: The board needs to be configurable by player.
         #       This will need to be dynamically rendered on round count.
         expected_output = <<~OUTPUT
+          ====================___====================
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
@@ -42,6 +43,7 @@ module MasterMind
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
+          ====================^^^====================
         OUTPUT
         expect { subject.display_board(game) }.to output(expected_output).to_stdout
       end
@@ -51,7 +53,7 @@ module MasterMind
       it "displays options to the player" do
         expected_options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" ")
 
-        expect { subject.display_options }.to output(/#{expected_options}/).to_stdout
+        expect { subject.display_options(game) }.to output(/#{expected_options}/).to_stdout
       end
     end
 
