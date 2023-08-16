@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "artii"
-require "cli/ui"
+# require "cli/ui"
 
 module MasterMind
   class CLI
