@@ -56,6 +56,10 @@ module MasterMind
       @decode_board
     end
 
+    def boards
+      [board, scoreboard]
+    end
+
     def valid_decode?
       return false unless decode&.length == PATTERN_LENGTH
       return false unless decode_contains_valid_options?
@@ -113,7 +117,7 @@ module MasterMind
     end
 
     def display_board
-      cli.display_board(board, scoreboard)
+      cli.display_board(self)
     end
 
     def display_options

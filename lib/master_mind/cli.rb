@@ -14,8 +14,10 @@ module MasterMind
       @font = Artii::Base.new
     end
 
-    def display_board(decode_board, scoreboard)
-      output(join_boards(decode_board, scoreboard))
+    def display_board(game)
+      output(top_of_board)
+      output(join_boards(game.boards))
+      output(bottom_of_board)
     end
 
     def display_options
@@ -48,8 +50,10 @@ module MasterMind
 
     private
 
-    def join_boards(decode_board, scoreboard)
+    def join_boards(boards)
       formatted_rows = []
+      decode_board, scoreboard = boards
+
       decode_board.length.times do |idx|
         code_row = formatted_board_row(decode_board, idx)
         key_row = formatted_board_row(scoreboard, idx)

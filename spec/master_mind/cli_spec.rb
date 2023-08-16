@@ -43,7 +43,7 @@ module MasterMind
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
         OUTPUT
-        expect { subject.display_board(game.decode_board, game.scoreboard) }.to output(expected_output).to_stdout
+        expect { subject.display_board(game) }.to output(expected_output).to_stdout
       end
     end
 

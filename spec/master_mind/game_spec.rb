@@ -13,9 +13,19 @@ module MasterMind
       end
     end
 
-    describe "Game Boards" do
+    context "Game Boards" do
+      describe "#boards" do
+        it "returns an array containing both boards" do
+          boards = subject.boards
+          board1, board2 = boards
+          expect(boards).to be_a Array
+          expect(board1).to eq subject.decode_board
+          expect(board2).to eq subject.scoreboard
+        end
+      end
+
       %i[board scoreboard].each do |board_sym|
-        context "##{board_sym}" do
+        describe "##{board_sym}" do
           it "returns a 2D matrix board" do
             board = subject.send(board_sym)
             expect(board).to be_a Array
