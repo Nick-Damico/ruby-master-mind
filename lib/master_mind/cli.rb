@@ -20,9 +20,9 @@ module MasterMind
       output(bottom_of_board)
     end
 
-    def display_options(game)
+    def display_options
       puts "-" * 43
-      output(game.game_tokens.map { |key, token| "#{key}: #{token}" }.join(" "))
+      puts(Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" "))
     end
 
     def greeting
