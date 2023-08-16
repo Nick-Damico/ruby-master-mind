@@ -51,7 +51,7 @@ module MasterMind
       it "displays options to the player" do
         expected_options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" ")
 
-        expect { subject.display_options }.to output(/#{expected_options}/).to_stdout
+        expect { subject.display_options(game) }.to output(/#{expected_options}/).to_stdout
       end
     end
 

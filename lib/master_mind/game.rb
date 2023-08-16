@@ -60,6 +60,10 @@ module MasterMind
       [board, scoreboard]
     end
 
+    def game_tokens
+      PLAYER_TOKENS
+    end
+
     def valid_decode?
       return false unless decode&.length == PATTERN_LENGTH
       return false unless decode_contains_valid_options?
@@ -121,7 +125,7 @@ module MasterMind
     end
 
     def display_options
-      cli.display_options
+      cli.display_options(self)
     end
 
     def display_start_screen

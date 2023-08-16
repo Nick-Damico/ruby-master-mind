@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "artii"
+require "cli/ui"
 
 module MasterMind
   class CLI
@@ -20,9 +21,13 @@ module MasterMind
       output(bottom_of_board)
     end
 
-    def display_options
+    def display_options(game)
       puts "-" * 43
-      puts(Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" "))
+      output(game.game_tokens.map { |key, token| "#{key}: #{token}" }.join(" "))
+      # options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" ")
+      # ::CLI::UI::StdoutRouter.enable
+      # options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }
+      # ::CLI::UI.ask(PROMPT_MSG, options: options)
     end
 
     def greeting
@@ -49,6 +54,14 @@ module MasterMind
     end
 
     private
+
+    def top_of_board
+      "#{"=" * 20}#{"_" * 3}#{"=" * 20}"
+    end
+
+    def bottom_of_board
+      "#{"=" * 20}#{"^" * 3}#{"=" * 20}"
+    end
 
     def join_boards(boards)
       formatted_rows = []
