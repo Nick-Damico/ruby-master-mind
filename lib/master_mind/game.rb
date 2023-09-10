@@ -138,7 +138,7 @@ module MasterMind
     end
 
     def player_decode
-      self.decode = cli.player_decode
+      self.decode = cli.player_decode(self)
     end
 
     def generate_decode_board
