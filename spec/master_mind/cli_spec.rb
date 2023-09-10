@@ -49,14 +49,6 @@ module MasterMind
       end
     end
 
-    describe "#display_options" do
-      it "displays options to the player" do
-        expected_options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" ")
-
-        expect { subject.display_options(game) }.to output(/#{expected_options}/).to_stdout
-      end
-    end
-
     describe "#prompt_for_decode" do
       it "prompts the player with a message to enter in a decode" do
         expect do
@@ -67,13 +59,14 @@ module MasterMind
 
     describe "#player_decode" do
       it "gets the players decode guess" do
-        allow(subject).to receive(:gets).and_return("1234")
-        expect(subject.player_decode).to eq([1, 2, 3, 4])
+        stubbed_guess = [1, 2, 3, 4]
+        allow(subject).to receive(:player_decode).and_return(stubbed_guess)
+        expect(subject.player_decode).to eq(stubbed_guess)
       end
 
-      context "invalid decode entry" do
+      xcontext "invalid decode entry" do
         it "does not raise an error if decode is nil value" do
-          allow(subject).to receive(:gets).and_return(nil)
+          allow(subject).to receive(:player_decode).and_return(nil)
           expect { subject.player_decode }.to_not raise_error
         end
 

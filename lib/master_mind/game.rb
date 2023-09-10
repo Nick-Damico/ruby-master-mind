@@ -35,10 +35,7 @@ module MasterMind
 
       while state.playing?
         display_board
-        until valid_decode?
-          display_options
-          player_decode
-        end
+        player_decode until valid_decode?
 
         score_decode
         insert_decode
@@ -124,10 +121,6 @@ module MasterMind
       cli.display_board(self)
     end
 
-    def display_options
-      cli.display_options(self)
-    end
-
     def display_start_screen
       cli.greeting
     end
@@ -145,7 +138,6 @@ module MasterMind
     end
 
     def player_decode
-      cli.prompt_for_decode
       self.decode = cli.player_decode
     end
 

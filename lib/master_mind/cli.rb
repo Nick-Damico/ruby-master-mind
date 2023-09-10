@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "artii"
-# require "cli/ui"
+require "cli/ui"
 
 module MasterMind
   class CLI
@@ -13,6 +13,7 @@ module MasterMind
 
     def initialize
       @font = Artii::Base.new
+      ::CLI::UI::StdoutRouter.enable
     end
 
     def display_board(game)
@@ -21,24 +22,21 @@ module MasterMind
       output(bottom_of_board)
     end
 
-    def display_options(game)
-      puts "-" * 43
-      output(game.game_tokens.map { |key, token| "#{key}: #{token}" }.join(" "))
-      # options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }.join(" ")
-      # ::CLI::UI::StdoutRouter.enable
-      # options = Game::PLAYER_TOKENS.map { |key, token| "#{key}: #{token}" }
-      # ::CLI::UI.ask(PROMPT_MSG, options: options)
-    end
-
     def greeting
       display_launch_screen
     end
 
-    def player_decode
-      input = gets
-      return nil if input.nil? || input.empty?
-
-      to_i(input.chomp)
+    def player_decode(game)
+      output_divider
+      selection = []
+      4.times do
+        selection << ::CLI::UI.ask("Select your decode option:") do |handler|
+          game.game_tokens.each do |key, token|
+            handler.option(token) { key }
+          end
+        end
+      end
+      selection
     end
 
     def prompt_for_decode
@@ -54,6 +52,10 @@ module MasterMind
     end
 
     private
+
+    def output_divider
+      puts "-" * 43
+    end
 
     def top_of_board
       "#{"=" * 20}#{"_" * 3}#{"=" * 20}"
@@ -75,12 +77,6 @@ module MasterMind
       end
 
       formatted_rows.join("\n")
-    end
-
-    def to_i(decode)
-      return decode unless decode.is_a?(String)
-
-      decode.chars.map(&:to_i)
     end
 
     def output(contents)
