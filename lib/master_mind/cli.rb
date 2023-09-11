@@ -28,15 +28,7 @@ module MasterMind
 
     def player_decode(game)
       output_divider
-      selection = []
-      game.decode_length.times do
-        selection << ::CLI::UI.ask("Select your decode option:") do |handler|
-          game.game_tokens.each do |key, token|
-            handler.option(token) { key }
-          end
-        end
-      end
-      selection
+      prompt_for_selection(game)
     end
 
     def prompt_for_decode
@@ -52,6 +44,18 @@ module MasterMind
     end
 
     private
+
+    def prompt_for_selection(game)
+      selection = []
+      game.decode_length.times do
+        selection << ::CLI::UI.ask("Select your decode option:") do |handler|
+          game.game_tokens.each do |key, token|
+            handler.option(token) { key }
+          end
+        end
+      end
+      selection
+    end
 
     def output_divider
       puts "-" * 43
