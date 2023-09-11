@@ -28,11 +28,7 @@ module MasterMind
 
     def player_decode(game)
       output_divider
-      prompt_for_selection(game)
-    end
-
-    def prompt_for_decode
-      puts PROMPT_MSG
+      prompt_for_decode(game)
     end
 
     def display_winning_msg
@@ -45,7 +41,7 @@ module MasterMind
 
     private
 
-    def prompt_for_selection(game)
+    def prompt_for_decode(game)
       selection = []
       game.decode_length.times do
         selection << ::CLI::UI.ask("Select your decode option:") do |handler|
