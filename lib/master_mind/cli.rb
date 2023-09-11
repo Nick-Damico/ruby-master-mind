@@ -29,7 +29,7 @@ module MasterMind
     def player_decode(game)
       output_divider
       selection = []
-      4.times do
+      game.decode_length.times do
         selection << ::CLI::UI.ask("Select your decode option:") do |handler|
           game.game_tokens.each do |key, token|
             handler.option(token) { key }

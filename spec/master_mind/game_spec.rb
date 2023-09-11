@@ -49,6 +49,13 @@ module MasterMind
       end
     end
 
+    describe "#decode_length" do
+      it "returns the length of the secret decode" do
+        expected_length = described_class::PATTERN_LENGTH
+        expect(subject.decode_length).to eq expected_length
+      end
+    end
+
     describe "#out_of_turns?" do
       it "returns true if player is out of turns" do
         subject.current_turn = -1

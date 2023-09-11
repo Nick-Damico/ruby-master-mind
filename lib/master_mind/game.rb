@@ -57,6 +57,10 @@ module MasterMind
       [board, scoreboard]
     end
 
+    def decode_length
+      PATTERN_LENGTH
+    end
+
     def game_tokens
       PLAYER_TOKENS
     end
