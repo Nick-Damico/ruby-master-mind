@@ -17,8 +17,8 @@ module MasterMind
     end
 
     def display_board(game)
-      output(top_of_board)
-      output(join_boards(game.boards))
+      output top_of_board
+      output join_boards(game.boards)
       output bottom_of_board
     end
 
