@@ -8,6 +8,8 @@ module MasterMind
     PROMPT_MSG = "Enter a #{Game::PATTERN_LENGTH} digit decode guess:"
     WINNING_MSG = "You WIN! You have successfully decoded the pattern"
     GAMEOVER_MSG = "Game Over! You have failed to decode the secret pattern"
+    BOARD_LENGTH = 20
+    BOARD_SEPARATOR_LENGTH = 3
 
     attr_reader :font
 
@@ -58,11 +60,11 @@ module MasterMind
     end
 
     def top_of_board
-      "#{"=" * 20}#{"_" * 3}#{"=" * 20}"
+      "#{"=" * BOARD_LENGTH}#{"_" * BOARD_SEPARATOR_LENGTH}#{"=" * BOARD_LENGTH}"
     end
 
     def bottom_of_board
-      "#{"=" * 20}#{"^" * 3}#{"=" * 20}"
+      "#{"=" * BOARD_LENGTH}#{"^" * BOARD_SEPARATOR_LENGTH}#{"=" * BOARD_LENGTH}"
     end
 
     def join_boards(boards)
