@@ -41,6 +41,12 @@ module MasterMind
       puts GAMEOVER_MSG
     end
 
+    def prompt_game_menu
+      ::CLI::UI.ask("Game Menu", filter_ui: false) do |handler|
+        handler.option("Start") { :playing }
+      end
+    end
+
     private
 
     def prompt_for_decode(game)

@@ -31,7 +31,7 @@ module MasterMind
 
     def start
       display_start_screen
-      update_state
+      prompt_game_menu while state.starting?
 
       while state.playing?
         display_board
@@ -141,10 +141,6 @@ module MasterMind
       won? ? display_winning_msg : display_gameover_msg
     end
 
-    def player_decode
-      self.decode = cli.player_decode(self)
-    end
-
     def generate_decode_board
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
     end
@@ -153,8 +149,16 @@ module MasterMind
       Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
     end
 
+    def player_decode
+      self.decode = cli.player_decode(self)
+    end
+
     def pattern_includes_value?(val)
       pattern.include?(val)
+    end
+
+    def prompt_game_menu
+      state.phase = cli.prompt_game_menu
     end
 
     def prompt_for_decode
