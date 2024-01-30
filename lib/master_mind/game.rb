@@ -33,17 +33,7 @@ module MasterMind
       display_start_screen
       prompt_game_menu while state.starting?
 
-      while state.playing?
-        display_board
-        player_decode until valid_decode?
-
-        score_decode
-        insert_decode
-        turn_count!
-        decode.clear
-
-        update_state
-      end
+      game_round while state.playing?
 
       display_board
       display_final_msg
@@ -59,6 +49,17 @@ module MasterMind
 
     def decode_length
       PATTERN_LENGTH
+    end
+
+    def game_round
+      display_board
+      player_decode until valid_decode?
+
+      score_decode
+      insert_decode
+      turn_count!
+      decode.clear
+      update_state
     end
 
     def game_tokens
