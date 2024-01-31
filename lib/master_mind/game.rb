@@ -16,8 +16,8 @@ module MasterMind
       exact_match: "⚫"
     }.freeze
 
-    attr_accessor :current_turn, :scoreboard, :decode
-    attr_reader :cli, :decode_board, :state
+    attr_accessor :current_turn, :scoreboard, :decode, :state
+    attr_reader :cli, :decode_board
 
     def initialize(cli, state)
       @current_turn = GAME_ROUNDS - 1
@@ -26,7 +26,8 @@ module MasterMind
       @cli = cli
       @state = state
       @decode = []
-      pattern
+
+      state.game = self
     end
 
     def start
