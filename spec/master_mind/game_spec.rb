@@ -3,9 +3,9 @@
 require "spec_helper"
 
 module MasterMind
-  RSpec.describe Game do
+  RSpec.describe MasterMind::Game do
     let(:cli) { CLI.new }
-    subject { described_class.new(cli, State.new) }
+    subject { described_class.new(cli, StartingState.instance) }
 
     describe "#initialize" do
       it "setups the #current_turn on the last row of the board" do

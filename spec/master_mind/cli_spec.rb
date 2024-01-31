@@ -4,7 +4,7 @@ require "master_mind"
 
 module MasterMind
   RSpec.describe CLI do
-    let(:game) { Game.new(CLI.new, State.new) }
+    let(:game) { Game.new(CLI.new, StartingState.instance) }
     subject { game.cli }
 
     context "Messages" do
