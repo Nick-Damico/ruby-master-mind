@@ -19,6 +19,11 @@ module MasterMind
     attr_accessor :current_turn, :scoreboard, :decode, :state
     attr_reader :cli, :decode_board
 
+    # TODO: Delgation Cleanup
+    #   There is alot of delgation method calls in this class.
+    #   Remove the boring boilerplate code with something like Ruby's Forwardable Class
+    #   https://ruby-doc.org/stdlib-3.0.0/libdoc/forwardable/rdoc/Forwardable.html
+
     def initialize(cli, state)
       @current_turn = GAME_ROUNDS - 1
       @decode_board = generate_decode_board
