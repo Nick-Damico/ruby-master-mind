@@ -15,7 +15,7 @@ module MasterMind
     def method_missing(method_name, *args)
       super unless method_name.end_with?("?")
 
-      to_s == method_name[0..-2] ? true : super
+      to_s == method_name.to_s[0..-2]
     end
 
     def respond_to_missing?(method_name, include_private = false)
