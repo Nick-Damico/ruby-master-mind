@@ -11,10 +11,7 @@ module MasterMind
     BOARD_LENGTH = 20
     BOARD_SEPARATOR_LENGTH = 3
 
-    attr_reader :font
-
     def initialize
-      @font = Artii::Base.new
       ::CLI::UI::StdoutRouter.enable
     end
 
@@ -96,7 +93,7 @@ module MasterMind
     end
 
     def display_launch_screen
-      puts font.asciify "MASTERMIND!!"
+      puts Artii::Base.new.asciify "MASTERMIND!!"
     end
   end
 end
