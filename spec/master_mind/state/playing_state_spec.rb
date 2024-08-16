@@ -9,6 +9,14 @@ module MasterMind
 
     it_behaves_like "a singleton"
 
+    it "returns false if checked for another state" do
+      expect(subject.starting?).to eq false
+    end
+
+    it "returns true if checked for another state" do
+      expect(subject).to respond_to(:starting?)
+    end
+
     describe "#playing?" do
       it "returns true" do
         expect(subject.playing?).to eq true
@@ -21,7 +29,7 @@ module MasterMind
           game = Game.new(CLI.new, subject)
           allow(game).to receive(:out_of_turns?).and_return true
 
-          subject.update_state
+          subject.update_state(game)
 
           expect(game.state).to be_a(GameOverState)
           expect(game.state).to_not eq(subject)
@@ -33,7 +41,7 @@ module MasterMind
           game = Game.new(CLI.new, subject)
           allow(game).to receive(:won?).and_return true
 
-          subject.update_state
+          subject.update_state(game)
 
           expect(game.state).to be_a(GameOverState)
           expect(game.state).to_not eq(subject)
@@ -46,7 +54,7 @@ module MasterMind
           allow(game).to receive(:won?).and_return false
           allow(game).to receive(:out_of_turns?).and_return false
 
-          subject.update_state
+          subject.update_state(game)
 
           expect(game.state).to be_a(described_class)
           expect(game.state).to eq subject

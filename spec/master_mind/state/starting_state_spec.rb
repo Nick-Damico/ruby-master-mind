@@ -19,7 +19,7 @@ module MasterMind
       it "moves game to PlayingState" do
         game = Game.new(CLI.new, subject)
 
-        subject.update_state
+        subject.update_state(game)
 
         expect(game.state).to_not eq subject
         expect(game.state).to be_a PlayingState

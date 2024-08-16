@@ -19,7 +19,7 @@ module MasterMind
       it "transitions to StartingState" do
         game = Game.new(CLI.new, subject)
 
-        subject.update_state
+        subject.update_state(game)
 
         expect(game.state).to_not eq subject
         expect(game.state.starting?).to eq true
