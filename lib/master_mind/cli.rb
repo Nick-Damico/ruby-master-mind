@@ -93,7 +93,7 @@ module MasterMind
     end
 
     def display_launch_screen
-      puts Artii::Base.new.asciify "MASTERMIND!!"
+      output Artii::Base.new.asciify "MASTERMIND!!"
     end
   end
 end
