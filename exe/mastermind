@@ -4,5 +4,5 @@ require_relative "../lib/master_mind"
 
 MasterMind::Game.new(
   MasterMind::CLI.new,
-  MasterMind::State.new
+  MasterMind::StartingState.instance
 ).start
