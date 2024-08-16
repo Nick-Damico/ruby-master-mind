@@ -31,8 +31,6 @@ module MasterMind
       @cli = cli
       @state = state
       @decode = []
-
-      state.game = self
     end
 
     def start
@@ -173,7 +171,7 @@ module MasterMind
     end
 
     def update_state
-      state.update(self)
+      state.update_state(self)
     end
 
     def score_decode_match(decode_val, column)
