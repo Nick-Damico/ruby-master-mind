@@ -163,7 +163,9 @@ module MasterMind
     end
 
     def prompt_game_menu
-      state.phase = cli.prompt_game_menu
+      selection = cli.prompt_game_menu while selection != :playing
+
+      update_state
     end
 
     def prompt_for_decode
