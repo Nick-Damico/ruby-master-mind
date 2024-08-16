@@ -9,8 +9,10 @@ module MasterMind
 
     context "Messages" do
       describe "#greeting" do
-        xit "displays game title to the player" do
-          expect { subject.greeting }.to output(/MasterMind/i).to_stdout
+        it "displays game title to the player" do
+          expected_output = Artii::Base.new.asciify("MASTERMIND!!")
+
+          expect { subject.greeting }.to output(match(/^#{Regexp.escape(expected_output)}\s*$/)).to_stdout
         end
       end
 
@@ -29,8 +31,6 @@ module MasterMind
 
     describe "#display_board" do
       it "displays the boards to the player" do
-        # TODO: The board needs to be configurable by player.
-        #       This will need to be dynamically rendered on round count.
         expected_output = <<~OUTPUT
           ====================___====================
           | 🔘 | 🔘 | 🔘 | 🔘 | | 🔘 | 🔘 | 🔘 | 🔘 |
@@ -52,20 +52,10 @@ module MasterMind
     describe "#player_decode" do
       it "gets the players decode guess" do
         stubbed_guess = [1, 2, 3, 4]
-        allow(subject).to receive(:player_decode).and_return(stubbed_guess)
-        expect(subject.player_decode).to eq(stubbed_guess)
-      end
 
-      xcontext "invalid decode entry" do
-        it "does not raise an error if decode is nil value" do
-          allow(subject).to receive(:player_decode).and_return(nil)
-          expect { subject.player_decode }.to_not raise_error
-        end
+        allow(subject).to receive(:prompt_for_decode).with(game).and_return(stubbed_guess)
 
-        it "does not raise an error if decode is a blank value" do
-          allow(subject).to receive(:gets).and_return("")
-          expect { subject.player_decode }.to_not raise_error
-        end
+        expect(subject.player_decode(game)).to eq(stubbed_guess)
       end
     end
   end
