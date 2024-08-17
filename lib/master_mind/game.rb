@@ -62,7 +62,6 @@ module MasterMind
       score_decode
       insert_decode
       turn_count!
-      decode.clear
       update_state
     end
 
