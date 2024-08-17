@@ -5,6 +5,7 @@ require "cli/ui"
 
 module MasterMind
   class CLI
+    TITLE = "MASTERMIND!"
     PROMPT_MSG = "Enter a #{Game::PATTERN_LENGTH} digit decode guess:"
     WINNING_MSG = "You WIN! You have successfully decoded the pattern"
     GAMEOVER_MSG = "Game Over! You have failed to decode the secret pattern"
@@ -93,7 +94,7 @@ module MasterMind
     end
 
     def display_launch_screen
-      output Artii::Base.new.asciify "MASTERMIND!!"
+      output Artii::Base.new.asciify TITLE
     end
   end
 end

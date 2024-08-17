@@ -10,7 +10,7 @@ module MasterMind
     context "Messages" do
       describe "#greeting" do
         it "displays game title to the player" do
-          expected_output = Artii::Base.new.asciify("MASTERMIND!!")
+          expected_output = Artii::Base.new.asciify(described_class::TITLE)
 
           expect { subject.greeting }.to output(match(/^#{Regexp.escape(expected_output)}\s*$/)).to_stdout
         end
