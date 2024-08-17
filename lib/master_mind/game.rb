@@ -57,6 +57,8 @@ module MasterMind
 
     def game_round
       display_board
+      # Clear the previous guess to ensure that only the current guess is validated.
+      decode.clear
       player_decode until valid_decode?
 
       score_decode
