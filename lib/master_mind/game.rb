@@ -5,6 +5,8 @@ module MasterMind
     GAME_ROUNDS = 10
     PATTERN_LENGTH = 4
     GUESSES_PER_ROUND = 4
+    # TODO: Update this to match offical rules,
+    #       Rules state there are six different colors.
     PLAYER_TOKENS = {
       1 => "🔴",
       2 => "🟢",
@@ -16,7 +18,7 @@ module MasterMind
       exact_match: "⚫"
     }.freeze
 
-    attr_accessor :current_turn, :scoreboard, :decode, :state
+    attr_accessor :current_turn, :board, :scoreboard, :decode, :state
     attr_reader :cli, :decode_board
 
     # TODO: Delgation Cleanup
@@ -26,8 +28,9 @@ module MasterMind
 
     def initialize(cli, state)
       @current_turn = GAME_ROUNDS - 1
-      @decode_board = generate_decode_board
-      @scoreboard = generate_scoreboard
+      @board = Board.new(GAME_ROUNDS, GUESSES_PER_ROUND)
+      @decode_board = @board.decode
+      @scoreboard = @board.key
       @cli = cli
       @state = state
       @decode = []
@@ -43,12 +46,8 @@ module MasterMind
       display_final_msg
     end
 
-    def board
-      @decode_board
-    end
-
     def boards
-      [board, scoreboard]
+      [decode_board, scoreboard]
     end
 
     def decode_length
@@ -62,7 +61,7 @@ module MasterMind
       player_decode until valid_decode?
 
       score_decode
-      insert_decode
+      add_decode
       turn_count!
       update_state
     end
@@ -78,8 +77,8 @@ module MasterMind
       true
     end
 
-    def insert_decode
-      board[current_turn] = convert_to_symbols(decode)
+    def add_decode
+      board.add_decode(current_turn, convert_to_symbols(decode))
     end
 
     def score_decode
@@ -123,8 +122,7 @@ module MasterMind
     end
 
     def decoded?
-      pattern_in_symbols = convert_to_symbols(pattern)
-      board.any? { |decode| decode == pattern_in_symbols }
+      board.match?(convert_to_symbols(pattern))
     end
 
     def display_board
@@ -145,14 +143,6 @@ module MasterMind
 
     def display_final_msg
       won? ? display_winning_msg : display_gameover_msg
-    end
-
-    def generate_decode_board
-      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
-    end
-
-    def generate_scoreboard
-      Array.new(GAME_ROUNDS) { Array.new(GUESSES_PER_ROUND, "🔘") }
     end
 
     def player_decode
