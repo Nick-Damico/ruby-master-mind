@@ -35,7 +35,7 @@ module MasterMind
     end
 
     context "Winning Game" do
-      it "should let a player play through to a WINNING game by successfully guessing the pattern" do
+      it "plays through a full game where the player successfully guesses the code within the allowed number of guesses" do
         stub_guesses = [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4]]
         stub_guesses << @pattern
         expected_end_of_game_turn_count = subject.current_turn - stub_guesses.size
@@ -52,20 +52,21 @@ module MasterMind
       end
     end
 
-    # context "Losing Game" do
-    #   it "should let a player play through an entire game without successfully guessing the pattern" do
-    #     wrong_guesses = 10.times.map { %w[1111 2222 3333 4444] }.flatten
-    #     expected_end_of_game_turn_count = -1
+    context "Losing Game" do
+      it "plays through a full game where the player fails to guess the code within the allowed number of attempt" do
+        wrong_guesses = 10.times.map { [1, 1, 1, 1] }
+        expected_end_of_game_turn_count = -1
 
-    #     allow(subject.cli).to receive(:display_options).and_return(*wrong_guesses)
-    #     expect(subject.pattern).to eq @pattern
-    #     expect(subject.state.starting?).to eq true
+        allow(subject.cli).to receive(:prompt_game_menu).and_return(:playing)
+        allow(subject.cli).to receive(:player_decode).and_return(*wrong_guesses)
+        expect(subject.pattern).to eq @pattern
+        expect(subject.state.starting?).to eq true
 
-    #     subject.start
-    #     expect(subject.current_turn).to eq expected_end_of_game_turn_count
-    #     expect(subject.state.game_over?).to eq true
-    #     expect(subject.won?).to eq false
-    #   end
-    # end
+        subject.start
+        expect(subject.current_turn).to eq expected_end_of_game_turn_count
+        expect(subject.state.gameover?).to eq true
+        expect(subject.won?).to eq false
+      end
+    end
   end
 end
