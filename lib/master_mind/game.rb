@@ -18,8 +18,8 @@ module MasterMind
       exact_match: "⚫"
     }.freeze
 
-    attr_accessor :current_turn, :board, :scoreboard, :decode, :state
-    attr_reader :cli, :decode_board
+    attr_accessor :current_turn, :board, :decode, :state
+    attr_reader :cli
 
     # TODO: Delgation Cleanup
     #   There is alot of delgation method calls in this class.
@@ -86,7 +86,7 @@ module MasterMind
       decode.each_with_index do |val, idx|
         next unless pattern_includes_value?(val)
 
-        scoreboard[current_turn][scoreboard_pos] = score_decode_match(val, idx)
+        board.score[current_turn][scoreboard_pos] = score_decode_match(val, idx)
         scoreboard_pos += 1
       end
     end
@@ -104,7 +104,7 @@ module MasterMind
     end
 
     def scoreboard_currrent_row
-      scoreboard[current_turn]
+      board.score[current_turn]
     end
 
     private
