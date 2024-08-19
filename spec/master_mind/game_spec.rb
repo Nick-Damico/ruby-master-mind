@@ -24,7 +24,7 @@ module MasterMind
         end
       end
 
-      %i[board scoreboard].each do |board_sym|
+      %i[decode_board scoreboard].each do |board_sym|
         describe "##{board_sym}" do
           it "returns a 2D matrix board" do
             board = subject.send(board_sym)
@@ -34,13 +34,13 @@ module MasterMind
 
           it "contains rows equal to the max number of rounds per game" do
             expected_row_count = described_class::GAME_ROUNDS
-            expect(subject.board.length).to eq expected_row_count
+            expect(subject.decode_board.length).to eq expected_row_count
           end
 
           it "contains columns equal to the guesses per round" do
             expected_column_count = described_class::GUESSES_PER_ROUND
-            min_column_size = subject.board.max.size
-            max_column_size = subject.board.min.size
+            min_column_size = subject.decode_board.max.size
+            max_column_size = subject.decode_board.min.size
 
             expect(min_column_size).to eq expected_column_count
             expect(max_column_size).to eq expected_column_count
@@ -88,17 +88,6 @@ module MasterMind
       end
     end
 
-    describe "#insert_decode" do
-      it "adds guess to board for the current turn" do
-        subject.current_turn = 1
-        subject.decode = [1, 2, 3, 4]
-        subject.insert_decode
-        expected_decode_in_symbols = subject.decode.map { |num| Game::PLAYER_TOKENS[num] }
-
-        expect(subject.board[subject.current_turn]).to eq expected_decode_in_symbols
-      end
-    end
-
     describe "#pattern" do
       it "returns a secret pattern that the player must match to win" do
         expect(subject.pattern).to be_a(Array)
@@ -124,7 +113,7 @@ module MasterMind
       it "returns true if player decoded the secret pattern" do
         expected_pattern = subject.pattern
         subject.decode = expected_pattern
-        subject.insert_decode
+        subject.add_decode
 
         expect(subject.won?).to eq true
       end
@@ -137,7 +126,7 @@ module MasterMind
         subject.instance_variable_set(:@pattern, pattern)
         subject.decode = guess
         subject.score_decode
-        subject.insert_decode
+        subject.add_decode
 
         exact_match_token = described_class::SCORE_TOKENS[:exact_match]
         match_token = described_class::SCORE_TOKENS[:match]

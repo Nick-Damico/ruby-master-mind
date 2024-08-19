@@ -30,7 +30,7 @@ module MasterMind
       @current_turn = GAME_ROUNDS - 1
       @board = Board.new(GAME_ROUNDS, GUESSES_PER_ROUND)
       @decode_board = @board.decode
-      @scoreboard = @board.key
+      @scoreboard = @board.score
       @cli = cli
       @state = state
       @decode = []
