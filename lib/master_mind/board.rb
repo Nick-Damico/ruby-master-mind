@@ -18,6 +18,10 @@ module MasterMind
       @score = generate_score
     end
 
+    def to_a
+      [decode, score]
+    end
+
     def add_decode(row, code)
       decode[row] = code
     end

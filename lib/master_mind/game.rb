@@ -47,7 +47,7 @@ module MasterMind
     end
 
     def boards
-      [decode_board, scoreboard]
+      board.to_a
     end
 
     def decode_length

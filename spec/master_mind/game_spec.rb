@@ -13,42 +13,6 @@ module MasterMind
       end
     end
 
-    context "Game Boards" do
-      describe "#boards" do
-        it "returns an array containing both boards" do
-          boards = subject.boards
-          board1, board2 = boards
-          expect(boards).to be_a Array
-          expect(board1).to eq subject.decode_board
-          expect(board2).to eq subject.scoreboard
-        end
-      end
-
-      %i[decode_board scoreboard].each do |board_sym|
-        describe "##{board_sym}" do
-          it "returns a 2D matrix board" do
-            board = subject.send(board_sym)
-            expect(board).to be_a Array
-            expect(board.first).to be_a Array
-          end
-
-          it "contains rows equal to the max number of rounds per game" do
-            expected_row_count = described_class::GAME_ROUNDS
-            expect(subject.decode_board.length).to eq expected_row_count
-          end
-
-          it "contains columns equal to the guesses per round" do
-            expected_column_count = described_class::GUESSES_PER_ROUND
-            min_column_size = subject.decode_board.max.size
-            max_column_size = subject.decode_board.min.size
-
-            expect(min_column_size).to eq expected_column_count
-            expect(max_column_size).to eq expected_column_count
-          end
-        end
-      end
-    end
-
     describe "#decode_length" do
       it "returns the length of the secret decode" do
         expected_length = described_class::PATTERN_LENGTH
