@@ -62,5 +62,13 @@ module MasterMind
         end
       end
     end
+
+    describe "#score_current_row" do
+      it "returns the score board row that matches the game turn count" do
+        expected_row = subject.score[game.current_turn]
+
+        expect(subject.score_current_row(game.current_turn)).to eq expected_row
+      end
+    end
   end
 end

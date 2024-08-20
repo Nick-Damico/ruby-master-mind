@@ -34,6 +34,10 @@ module MasterMind
       decode.any? { |code| code == solution }
     end
 
+    def score_current_row(turn_count)
+      score[turn_count]
+    end
+
     private
 
     def generate_decode

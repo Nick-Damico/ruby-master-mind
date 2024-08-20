@@ -101,9 +101,8 @@ module MasterMind
       decoded? && !out_of_turns?
     end
 
-    # TODO: EXTRACT?
     def scoreboard_currrent_row
-      board.score[current_turn]
+      board.score_current_row(current_turn)
     end
 
     private
