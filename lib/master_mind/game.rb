@@ -83,7 +83,7 @@ module MasterMind
 
     def score_decode
       decode.each_with_index do |val, idx|
-        next unless pattern_includes_value?(val)
+        next unless matches_pattern?(val)
 
         board.add_score(score_decode_match(val, idx), current_turn)
       end
@@ -148,7 +148,7 @@ module MasterMind
       self.decode = cli.player_decode(self)
     end
 
-    def pattern_includes_value?(val)
+    def matches_pattern?(val)
       pattern.include?(val)
     end
 
