@@ -26,6 +26,10 @@ module MasterMind
       decode[row] = code
     end
 
+    def add_score(decode_score, turn_count)
+      score[turn_count][first_empty_slot(turn_count)] = decode_score
+    end
+
     def match?(solution)
       decode.any? { |code| code == solution }
     end
@@ -38,6 +42,10 @@ module MasterMind
 
     def generate_score
       Array.new(@rounds) { Array.new(@guesses, EMPTY_TOKEN) }
+    end
+
+    def first_empty_slot(turn_count)
+      score[turn_count].find_index { |column| column == EMPTY_TOKEN }
     end
   end
 end

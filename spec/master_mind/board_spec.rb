@@ -18,6 +18,17 @@ module MasterMind
       end
     end
 
+    describe "#add_score" do
+      it "add players decode score to the first empty slot in the row" do
+        exact_match_score = Game::SCORE_TOKENS[:match]
+        turn_count = game.current_turn
+
+        subject.add_score(exact_match_score, turn_count)
+
+        expect(subject.score[turn_count][0]).to eq exact_match_score
+      end
+    end
+
     describe "#to_a" do
       it "returns an array containing both the decode and score boards" do
         expect(subject.to_a).to eq [subject.decode, subject.score]

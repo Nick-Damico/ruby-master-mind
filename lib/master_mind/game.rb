@@ -82,12 +82,10 @@ module MasterMind
     end
 
     def score_decode
-      scoreboard_pos = 0
       decode.each_with_index do |val, idx|
         next unless pattern_includes_value?(val)
 
-        board.score[current_turn][scoreboard_pos] = score_decode_match(val, idx)
-        scoreboard_pos += 1
+        board.add_score(score_decode_match(val, idx), current_turn)
       end
     end
 
@@ -103,6 +101,7 @@ module MasterMind
       decoded? && !out_of_turns?
     end
 
+    # TODO: EXTRACT?
     def scoreboard_currrent_row
       board.score[current_turn]
     end
