@@ -29,8 +29,6 @@ module MasterMind
     def initialize(cli, state)
       @current_turn = GAME_ROUNDS - 1
       @board = Board.new(GAME_ROUNDS, GUESSES_PER_ROUND)
-      @decode_board = @board.decode
-      @scoreboard = @board.score
       @cli = cli
       @state = state
       @decode = []
