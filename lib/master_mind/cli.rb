@@ -48,15 +48,19 @@ module MasterMind
     private
 
     def prompt_for_decode(game)
-      selection = []
-      game.decode_length.times do
-        selection << ::CLI::UI.ask("Select your decode option:", filter_ui: false) do |handler|
-          game.game_tokens.each do |key, token|
-            handler.option(token) { key }
-          end
-        end
+      game.decode_length.times.map do
+        ask_for_selection(game.game_tokens)
       end
-      selection
+    end
+
+    def ask_for_selection(options)
+      ::CLI::UI.ask("Select your decode option:", filter_ui: false) do |handler|
+        provide_options(options, handler)
+      end
+    end
+
+    def provide_options(options, handler)
+      options.each { |key, token| handler.option(token) { key } }
     end
 
     def output_divider
