@@ -76,25 +76,22 @@ module MasterMind
     end
 
     def join_boards(boards)
-      formatted_rows = []
-      decode_board, scoreboard = boards
+      decode, score = boards
 
-      decode_board.length.times do |idx|
-        code_row = formatted_board_row(decode_board, idx)
-        key_row = formatted_board_row(scoreboard, idx)
+      decode.length.times.map { |idx| format_row(decode[idx], score[idx]) }
+            .join("\n")
+    end
 
-        formatted_rows << [code_row, key_row].join(" ")
-      end
-
-      formatted_rows.join("\n")
+    def format_row(row1, row2)
+      [formatted_board_row(row1), formatted_board_row(row2)].join(" ")
     end
 
     def output(contents)
       puts contents
     end
 
-    def formatted_board_row(board, row_num)
-      "| #{board[row_num].join(" | ")} |"
+    def formatted_board_row(row)
+      "| #{row.join(" | ")} |"
     end
 
     def display_launch_screen
