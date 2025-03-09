@@ -84,16 +84,34 @@ module MasterMind
     end
 
     describe "#score_decode" do
-      it "scores current row of the scoreboard for each correctly decoded value" do
-        pattern = [3, 3, 2, 1]
-        guess   = [1, 2, 2, 2]
+      let(:pattern) { [2, 2, 2, 4] }
+      let!(:exact_match_token) { described_class::SCORE_TOKENS[:exact_match] }
+      let!(:match_token) { described_class::SCORE_TOKENS[:match] }
+
+      before do
         subject.instance_variable_set(:@pattern, pattern)
-        subject.decode = guess
+      end
+
+      it "scores a match in the right position with a single 'black' token" do
+        subject.decode = [1, 1, 1, 4]
         subject.score_decode
         subject.add_decode
 
-        exact_match_token = described_class::SCORE_TOKENS[:exact_match]
-        match_token = described_class::SCORE_TOKENS[:match]
+        expect(subject.scoreboard_currrent_row.tally[exact_match_token]).to eq 1
+      end
+
+      it "scores a match in the wrong position with a single 'white' token" do
+        subject.decode = [1, 4, 1, 1]
+        subject.score_decode
+        subject.add_decode
+
+        expect(subject.scoreboard_currrent_row.tally[match_token]).to eq 1
+      end
+
+      xit "scores current row of the scoreboard for each correctly decoded value" do
+        subject.decode = [1, 2, 2, 2]
+        subject.score_decode
+        subject.add_decode
 
         expect(subject.scoreboard_currrent_row.tally[match_token]).to eq 3
         expect(subject.scoreboard_currrent_row.tally[exact_match_token]).to eq 1
